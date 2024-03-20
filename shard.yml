@@ -1,0 +1,15 @@
+name: mock-gpt
+version: 1.0.0
+
+authors:
+  - Sunrise <yane@88.com>
+
+targets:
+  mockgpt:
+    main: src/mockgpt.cr
+
+dependencies:
+  grip:
+    github: grip-framework/grip
+
+license: Apache-2.0
