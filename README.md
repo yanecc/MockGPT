@@ -35,9 +35,9 @@ shards build -Dpreview_mt --production
 
 ``` json
 {
-	"ip": "localhost",
-	"port": 3000,
-	"model": "llama2-chinese"
+    "ip": "localhost",
+    "port": 3000,
+    "model": "llama2-chinese"
 }
 ```
 
