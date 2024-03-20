@@ -2,11 +2,13 @@
 
 围绕OpenAI GPT建立的AI应用越来越多，这些应用提供对话、翻译、Copilot等服务。
 
-Ollama有着非常多能够在用户个人电脑部署的开源大模型，可用于聊天或编程。
-值得高兴的是，Ollama为这些模型提供了相同的API接口
+Ollama有着非常多能够在用户个人电脑部署的开源大模型，可用于聊天或编程。<br>
+值得高兴的是，Ollama为这些模型提供了相同的API接口<br>
 开源意味着免费和离线使用，这就为本项目的存在提供了可能
 
 MockGPT在用户本机将应用软件向OpenAI GPT发起的请求，转移到Ollama，并以OpenAI GPT的响应格式返回给应用，从而达到模仿OpenAI GPT的目的，可以用于交谈对话、AI翻译、编程辅助、作文等。
+
+如果MockGPT帮到了你，请点亮右上角的Star！
 
 # 预先要求
 
@@ -24,7 +26,7 @@ shards build -Dpreview_mt --production
 
 # MockGPT配置
 
-可以通过配置文件或运行时参数修改配置
+可以通过配置文件或运行时参数修改配置<br>
 优先级：运行时参数 > 配置文件 > 默认配置
 
 ## 配置文件
@@ -50,9 +52,9 @@ shards build -Dpreview_mt --production
 -h, --help                       Show this help
 ```
 
-`-b`：MockGPT监听的IP地址
-`-p`：MockGPT监听的端口号
-`-m`：MockGPT请求的模型**全称**
+`-b`：MockGPT监听的IP地址<br>
+`-p`：MockGPT监听的端口号<br>
+`-m`：MockGPT请求的模型**全称**<br>
 `-h`：使用帮助
 
 # 使用方法

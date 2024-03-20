@@ -2,9 +2,13 @@
 
 With the increasing number of AI applications built around OpenAI GPT, these applications provide services such as dialogue, translation, Copilot, and more.
 
-Ollama has a variety of open-source large models that can be deployed on a user's personal computer for chatting or programming purposes. It is worth noting that Ollama provides the same API interface for these models. Being open-source means they can be used for free and offline, which makes the existence of this project possible.
+Ollama has a variety of open-source large models that can be deployed on a user's personal computer for chatting or programming purposes.<br>
+It is worth noting that Ollama provides the same API interface for these models.<br>
+Open-source means they can be used for free and offline, which makes the existence of this project possible.
 
 MockGPT acts as an intermediary on the user's local machine, forwarding requests from application software to OpenAI GPT to Ollama, and returning responses to the application in the format of OpenAI GPT, achieving the goal of mimicking OpenAI GPT. It can be used for conversational dialogue, AI translation, programming assistance, essay writing, and more.
+
+If the project helps you, please light up the star in the upper right!
 
 # Requirement
 
@@ -22,7 +26,7 @@ shards build -Dpreview_mt --production
 
 # MockGPT Configuration
 
-Configuration can be modified through a configuration file or runtime parameters.
+Configuration can be modified through a configuration file or runtime parameters.<br>
 Priority: runtime parameters > configuration file > default configuration.
 
 ## Profiles
@@ -48,9 +52,9 @@ The default configuration above is used if no parameters are provided.
 -h, --help                       Show this help
 ```
 
-`-b`：Bind to the specified IP
-`-p`：Run on the specified port
-`-m`：Employ the specified model (Full name)
+`-b`：Bind to the specified IP<br>
+`-p`：Run on the specified port<br>
+`-m`：Employ the specified model (Full name)<br>
 `-h`：Show this help
 
 # Usage
