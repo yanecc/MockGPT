@@ -19,7 +19,7 @@ if File.file?(confPath)
 end
 
 OptionParser.parse do |parser|
-  parser.banner = "Usage: app [arguments]"
+  parser.banner = "Usage: mockgpt [arguments]"
   parser.on("-b HOST", "--binding HOST", "Bind to the specified IP") { |_host| Mocker.ip = _host }
   parser.on("-p PORT", "--port PORT", "Run on the specified port") { |_port| Mocker.port = _port.to_i }
   parser.on("-m MODEL", "--mocker MODEL", "Employ the specified model") { |_model| Mocker.model = _model }
@@ -129,5 +129,5 @@ class Application < Grip::Application
   getter directory_listing : Bool = false
 end
 
-app = Application.new(Mocker.ip, Mocker.port)
-app.run
+mockgpt = Application.new(Mocker.ip, Mocker.port)
+mockgpt.run
