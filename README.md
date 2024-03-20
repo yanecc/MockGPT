@@ -1,22 +1,22 @@
-# 项目说明
+# Description
 
-围绕OpenAI GPT建立的AI应用越来越多，这些应用提供对话、翻译、Copilot等服务。
+With the increasing number of AI applications built around OpenAI GPT, these applications provide services such as dialogue, translation, Copilot, and more.
 
-[Ollama](https://github.com/ollama/ollama)有着非常多能够在用户个人电脑部署的开源大模型，可用于聊天或编程。<br>
-值得高兴的是，Ollama为这些模型提供了相同的API接口<br>
-开源意味着免费和离线使用，这就为本项目的存在提供了可能
+[Ollama](https://github.com/ollama/ollama) has a variety of open-source large models that can be deployed on a user's personal computer for chatting or programming purposes.<br>
+It is worth noting that Ollama provides the same API interface for these models.<br>
+Open-source means they can be used for free and offline, which makes the existence of this project possible.
 
-MockGPT在用户本机将应用软件向OpenAI GPT发起的请求，转移到Ollama，并以OpenAI GPT的响应格式返回给应用，从而达到模仿OpenAI GPT的目的，可以用于交谈对话、AI翻译、编程辅助、作文等。
+MockGPT acts as an intermediary on the user's local machine, forwarding requests from application software to OpenAI GPT to Ollama, and returning responses to the application in the format of OpenAI GPT, achieving the goal of mimicking OpenAI GPT. It can be used for conversational dialogue, AI translation, programming assistance, essay writing, and more.
 
-如果MockGPT帮到了你，请点亮右上角的Star！
+If the project helps you, please light up the star in the upper right!
 
-# 预先要求
+# Requirement
 
-Ollama及至少一个大模型
+Ollama and at least one large model pulled.
 
-# 安装
+# Installation
 
-发布页面提供了适用于Windows和Linux平台、x86_64架构、静态编译的MockGPT独立程序，若在其他平台使用，需要安装Crystal语言环境自行编译。
+The release page provides a standalone MockGPT program for Windows and Linux platforms, x86_64 architecture, statically compiled. For other platforms, you will need to install the Crystal language environment and compile it yourself.
 
 ``` shell
 git clone https://github.com/18183883296/MockGPT
@@ -24,14 +24,14 @@ shards install
 shards build -Dpreview_mt --production
 ```
 
-# MockGPT配置
+# MockGPT Configuration
 
-可以通过配置文件或运行时参数修改配置<br>
-优先级：运行时参数 > 配置文件 > 默认配置
+Configuration can be modified through a configuration file or runtime parameters.<br>
+Priority: runtime parameters > configuration file > default configuration.
 
-## 配置文件
+## Profiles
 
-可以将配置文件`mocker.json`放在用户主目录或程序运行目录下。
+The configuration file mocker.json can be placed in the user's home directory or the program's runtime directory.
 
 ``` json
 {
@@ -41,9 +41,9 @@ shards build -Dpreview_mt --production
 }
 ```
 
-以上为无参数运行时的默认配置
+The default configuration above is used if no parameters are provided.
 
-## 运行时参数
+## Options
 
 ```
 -b HOST, --binding HOST          Bind to the specified IP
@@ -52,19 +52,18 @@ shards build -Dpreview_mt --production
 -h, --help                       Show this help
 ```
 
-`-b`：MockGPT监听的IP地址<br>
-`-p`：MockGPT监听的端口号<br>
-`-m`：MockGPT请求的模型**全称**<br>
-`-h`：使用帮助
+`-b`：Bind to the specified IP<br>
+`-p`：Run on the specified port<br>
+`-m`：Employ the specified model (Full name)<br>
+`-h`：Show this help
 
-# 使用方法
+# Usage
 
-1. 启动Ollama及MockGPT服务
-2. 在AI应用将请求地址设置为http://<mocker_ip>:<mocker_port>
-（模型和API key可以任意设置或留空）
+1. Start Ollama and MockGPT services.
+2. Set the request address in the AI application to http://<mocker_ip>:<mocker_port>. (Models and API keys can be set arbitrarily or left blank).
 
-# 欢迎提出建议
+# Welcome to Contribute
 
-1. 如果有能够长期免费使用的大模型，请告诉我，后续会考虑支持以完善这个项目
-2. 目前已知适配NextChat、Chatbox、TTime等AI应用，如果你发现了更多，欢迎留言补充
-3. 如果你发现MockGPT无法应用到某个支持OpenAI GPT的AI应用，请留言告诉我
+1. If you have large models that can be used for free in the long term, please let me know. Support for these models may be considered to enhance this project in the future.
+2. Currently known to be compatible with AI applications such as NextChat, Chatbox, TTime, and more. If you discover more, feel free to leave a comment to add to the list.
+3. If you find that MockGPT cannot be applied to a specific AI application that supports OpenAI GPT, please leave a comment to inform me.

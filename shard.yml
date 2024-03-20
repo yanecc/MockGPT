@@ -12,4 +12,6 @@ dependencies:
   grip:
     github: grip-framework/grip
 
+crystal: 1.11.2
+
 license: Apache-2.0
