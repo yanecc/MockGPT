@@ -61,7 +61,7 @@ shards build -Dpreview_mt --production
 
 1. 启动Ollama及MockGPT服务
 2. 在AI应用将请求地址设置为http://<mocker_ip>:<mocker_port>
-（模型和APIkey可以任意设置或留空）
+（模型和API key可以任意设置或留空）
 
 # 欢迎提出建议
 
