@@ -10,7 +10,7 @@ module Mocker
   class_property model : String = "llama2-chinese"
 end
 
-confPath = File.exists?("#{Path.home}/mocker.json") ? "#{Path.home}/mocker.json" : "#{__DIR__}/mocker.json"
+confPath = File.exists?("#{Path.home}/mocker.json") ? "#{Path.home}/mocker.json" : "#{File.dirname Process.executable_path.not_nil!}/mocker.json"
 if File.file?(confPath)
   mocker = JSON.parse(File.read(confPath))
   Mocker.ip = mocker["ip"].as_s if mocker["ip"]?
