@@ -2,7 +2,7 @@
 
 With the increasing number of AI applications built around OpenAI GPT, these applications provide services such as dialogue, translation, Copilot, and more.
 
-Ollama has a variety of open-source large models that can be deployed on a user's personal computer for chatting or programming purposes.<br>
+[Ollama](https://github.com/ollama/ollama) has a variety of open-source large models that can be deployed on a user's personal computer for chatting or programming purposes.<br>
 It is worth noting that Ollama provides the same API interface for these models.<br>
 Open-source means they can be used for free and offline, which makes the existence of this project possible.
 
