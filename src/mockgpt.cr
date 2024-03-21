@@ -88,6 +88,7 @@ class MockGPT < Grip::Controllers::Http
           "model"   => "gpt-4",
         }
         context.send_resp "data: #{transformedChunk.to_json}\n\n"
+        context.response.flush
       end
       context.send_resp "data: [DONE]"
     end
