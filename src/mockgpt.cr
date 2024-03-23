@@ -41,45 +41,23 @@ class MockGPT < Grip::Controllers::Http
     presetUri = URI.parse "http://#{ENV["OLLAMA_HOST"]}"
     url = URI.new scheme: presetUri.scheme || "http", host: presetUri.host || "localhost", port: presetUri.port || 11434
     agent = HTTP::Client.new url
-    print " POST ".colorize.on_green, "                #{url}/api/chat\n"
-    agent.post(path: "/api/chat", body: params.to_json) do |response|
-      # context.send_resp response.body_io.try &.gets_to_end
+    agent.connect_timeout = 5
+    print " POST ".colorize.bright.on_blue, "|                #{url}/api/chat | "
+    begin
+      agent.post(path: "/api/chat", body: params.to_json) do |response|
+        # context.send_resp response.body_io.try &.gets_to_end
 
-      currentTime = Time.local.to_unix
+        currentTime = Time.local.to_unix
 
-      leadChunk = {
-        "choices" => [
-          {
-            "delta" => {
-              "role"    => "assistant",
-              "content" => "",
-            },
-            "index"         => 0,
-            "finish_reason" => nil,
-          },
-        ],
-        "created" => currentTime,
-        "id"      => "chatcmpl",
-        "object"  => "chat.completion.chunk",
-        "model"   => "gpt-4",
-      }
-      context.merge_resp_headers({"Content-Type"      => "text/event-stream; charset=utf-8",
-                                  "Cache-Control"     => "no-cache",
-                                  "X-Accel-Buffering" => "no"})
-        .send_resp "data: #{leadChunk.to_json}\n\n"
-
-      # response.body_io.each_line.skip(1).each do |line|
-      response.body_io.each_line do |line|
-        chunk = JSON.parse line
-
-        transformedChunk = {
+        leadChunk = {
           "choices" => [
             {
               "delta" => {
-                "content" => chunk["message"]["content"].as_s,
+                "role"    => "assistant",
+                "content" => "",
               },
               "index"         => 0,
-              "finish_reason" => chunk["done"].as_bool ? "stop" : nil,
+              "finish_reason" => nil,
             },
           ],
           "created" => currentTime,
@@ -87,11 +65,37 @@ class MockGPT < Grip::Controllers::Http
           "object"  => "chat.completion.chunk",
           "model"   => "gpt-4",
         }
-        context.send_resp "data: #{transformedChunk.to_json}\n\n"
-        context.response.flush
+        context.send_resp("data: #{leadChunk.to_json}\n\n")
+          .response.flush
+
+        # response.body_io.each_line.skip(1).each do |line|
+        response.body_io.each_line do |line|
+          chunk = JSON.parse line
+
+          transformedChunk = {
+            "choices" => [
+              {
+                "delta" => {
+                  "content" => chunk["message"]["content"].as_s,
+                },
+                "index"         => 0,
+                "finish_reason" => chunk["done"].as_bool ? "stop" : nil,
+              },
+            ],
+            "created" => currentTime,
+            "id"      => "chatcmpl",
+            "object"  => "chat.completion.chunk",
+            "model"   => "gpt-4",
+          }
+          context.send_resp("data: #{transformedChunk.to_json}\n\n")
+            .response.flush
+        end
+        puts " Done ".colorize.bright.on_green
       end
-      context.send_resp "data: [DONE]"
+    rescue
+      puts " Fail ".colorize.bright.on_red
     end
+    context.send_resp "data: [DONE]"
   end
 end
 
@@ -103,6 +107,9 @@ class CrossOriginResourceSharing
     context.response.headers.add "Access-Control-Allow-Origin", "*"
     context.response.headers.add "Access-Control-Allow-Headers", "*"
     context.response.headers.add "Access-Control-Allow-Credentials", "true"
+    context.response.headers.add "Content-Type", "text/event-stream; charset=utf-8"
+    context.response.headers.add "Cache-Control", "no-cache"
+    context.response.headers.add "X-Accel-Buffering", "no"
 
     if context.request.method != "POST"
       context.response.headers.add "Access-Control-Allow-Methods", "POST"
