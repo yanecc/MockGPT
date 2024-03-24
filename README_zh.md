@@ -6,7 +6,7 @@
 值得高兴的是，Ollama为这些模型提供了相同的API接口<br>
 开源意味着免费和离线使用，这就为本项目的存在提供了可能
 
-MockGPT在用户本机将应用软件向OpenAI GPT发起的请求，转移到Ollama，并以OpenAI GPT的响应格式返回给应用，从而达到模仿OpenAI GPT的目的，可以用于交谈对话、AI翻译、编程辅助、作文等。
+MockGPT在用户本机将应用软件向OpenAI GPT发起的请求，转移到Ollama，并以OpenAI GPT的响应格式返回给应用，从而达到模仿OpenAI GPT的目的，可以用于交谈对话、AI翻译、编程辅助、作文等，现已支持常规请求和流式请求。
 
 如果MockGPT帮到了你，请点亮右上角的Star！
 
@@ -65,6 +65,12 @@ shards build -Dpreview_mt --production
 
 # 欢迎提出建议
 
-1. 如果有能够长期免费使用的大模型，请告诉我，后续会考虑支持以完善这个项目
-2. 目前已知适配NextChat、Chatbox、TTime等AI应用，如果你发现了更多，欢迎留言补充
-3. 如果你发现MockGPT无法应用到某个支持OpenAI GPT的AI应用，请留言告诉我
+- 如果有能够长期免费使用的大模型，请告诉我，后续会考虑支持以完善这个项目
+- 如果你发现MockGPT无法应用到某个支持OpenAI GPT的AI应用，请留言告诉我
+- 目前已知适配下列AI应用，如果你发现了更多，欢迎留言补充
+  - NextChat
+  - Chatbox
+  - TTime
+  - 划词翻译（浏览器插件）
+
+注：在谷歌浏览器插件中使用，需进入`chrome://flags`，启用`Insecure origins treated as secure`一项，添加本地监听地址

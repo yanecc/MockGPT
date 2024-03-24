@@ -6,7 +6,8 @@ With the increasing number of AI applications built around OpenAI GPT, these app
 It is worth noting that Ollama provides the same API interface for these models.<br>
 Open-source means they can be used for free and offline, which makes the existence of this project possible.
 
-MockGPT acts as an intermediary on the user's local machine, forwarding requests from application software to OpenAI GPT to Ollama, and returning responses to the application in the format of OpenAI GPT, achieving the goal of mimicking OpenAI GPT. It can be used for conversational dialogue, AI translation, programming assistance, essay writing, and more.
+MockGPT acts as an intermediary on the user's local machine, forwarding requests from application software to OpenAI GPT to Ollama, and returning responses to the application in the format of OpenAI GPT, achieving the goal of mimicking OpenAI GPT. It can be used for conversational dialogue, AI translation, programming assistance, essay writing, and more. Default and streaming requests are now supported.
+
 
 If the project helps you, please light up the star in the upper right!
 
@@ -64,6 +65,12 @@ The default configuration above is used if no parameters are provided.
 
 # Welcome to Contribute
 
-1. If you have large models that can be used for free in the long term, please let me know. Support for these models may be considered to enhance this project in the future.
-2. Currently known to be compatible with AI applications such as NextChat, Chatbox, TTime, and more. If you discover more, feel free to leave a comment to add to the list.
-3. If you find that MockGPT cannot be applied to a specific AI application that supports OpenAI GPT, please leave a comment to inform me.
+- If you have large models that can be used for free in the long term, please let me know. Support for these models may be considered to enhance this project in the future.
+- If you find that MockGPT cannot be applied to a specific AI application that supports OpenAI GPT, please leave a comment to inform me.
+- Currently known to be compatible with the following AI applications . If you discover more, feel free to leave a comment to add to the list.
+  - NextChat
+  - Chatbox
+  - TTime
+  - 划词翻译 (Browser extension)
+  
+Note: When using with Google Chrome browser extensions, you need to go to `chrome://flags`, enable the `Insecure origins treated as secure` option, and add the local listening address.
