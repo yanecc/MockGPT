@@ -5,6 +5,7 @@ class Application < Grip::Application
     router.insert(1, CrossOriginResourceSharing.new)
 
     post "/v1/chat/completions", MockGPT, as: :ollama
+    options "/v1/chat/completions", MockGPT, as: :connect
   end
 
   getter host : String

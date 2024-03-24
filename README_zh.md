@@ -37,7 +37,7 @@ shards build -Dpreview_mt --production
 {
     "ip": "localhost",
     "port": 3000,
-    "model": "llama2-chinese"
+    "model": "codellama:13b"
 }
 ```
 

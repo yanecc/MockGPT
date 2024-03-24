@@ -1,4 +1,10 @@
 class MockGPT < Grip::Controllers::Http
+  def connect(context : Context)
+    context
+      .put_status(HTTP::Status::OK)
+      .halt
+  end
+
   def ollama(context : Context)
     params = context.fetch_json_params
     params["model"] = Mocker.model
