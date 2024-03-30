@@ -27,8 +27,13 @@ shards build -Dpreview_mt --production
 
 # MockGPT Configuration
 
-Configuration can be modified through a configuration file or runtime parameters.<br>
-Priority: runtime parameters > configuration file > default configuration.
+Configuration can be modified through a configuration file or runtime parameters.
+
+Priority:<br>
+1. runtime parameters
+2. configuration file in program directory
+3. configuration file in user home directory
+4. default configuration
 
 ## Profiles
 

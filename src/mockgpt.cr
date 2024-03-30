@@ -13,7 +13,9 @@ module Mocker
   class_property gpt : String = "gpt-4"
 end
 
-confPath = File.exists?("#{Path.home}/mocker.json") ? "#{Path.home}/mocker.json" : "#{File.dirname Process.executable_path.not_nil!}/mocker.json"
+homePath = "#{Path.home}/mocker.json"
+exePath = "#{File.dirname Process.executable_path.not_nil!}/mocker.json"
+confPath = File.exists?(exePath) ? exePath : homePath
 if File.file?(confPath)
   mocker = JSON.parse(File.read(confPath))
   Mocker.ip = mocker["ip"].as_s if mocker["ip"]?
