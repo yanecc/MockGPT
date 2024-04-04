@@ -68,6 +68,10 @@ The default configuration above is used if no parameters are provided.
 1. Start Ollama and MockGPT services.
 2. Set the request address in the AI application to http://<mocker_ip>:<mocker_port>. (Models and API keys can be set arbitrarily or left blank).
 
+# Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/18183883296/MockGPT.svg?variant=adaptive)](https://starchart.cc/18183883296/MockGPT)
+
 # Welcome to Contribute
 
 - If you have large models that can be used for free in the long term, please let me know. Support for these models may be considered to enhance this project in the future.

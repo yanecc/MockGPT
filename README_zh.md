@@ -68,6 +68,10 @@ shards build -Dpreview_mt --production
 2. 在AI应用将请求地址设置为http://<mocker_ip>:<mocker_port>
 （模型和API key可以任意设置或留空）
 
+## 星图
+
+[![Stargazers over time](https://starchart.cc/18183883296/MockGPT.svg?variant=adaptive)](https://starchart.cc/18183883296/MockGPT)
+
 # 欢迎提出建议
 
 - 如果有能够长期免费使用的大模型，请告诉我，后续会考虑支持以完善这个项目
