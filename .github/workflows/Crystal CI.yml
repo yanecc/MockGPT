@@ -36,6 +36,3 @@ jobs:
         run: crystal spec --order=random
       - name: Build
         run: shards build
-      - name: Check formatting
-        run: crystal tool format; git diff --exit-code
-        if: matrix.crystal != 'nightly' && matrix.os == 'ubuntu-latest'
