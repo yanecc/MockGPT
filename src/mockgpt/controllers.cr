@@ -11,7 +11,7 @@ class MockGPT < Grip::Controllers::Http
     presetUri = URI.parse "http://#{ENV["OLLAMA_HOST"]}"
     url = URI.new scheme: presetUri.scheme || "http", host: presetUri.host || "localhost", port: presetUri.port || 11434
     agent = HTTP::Client.new url
-    agent.connect_timeout = 5
+    agent.connect_timeout = 5.seconds
     print " POST ".colorize.bright.on_blue, "|            #{url}/api/chat | "
     currentTime = Time.local.to_unix
     if params["stream"]?
