@@ -54,7 +54,7 @@ jobs:
             VERSION=$(date +'%Y%m%d')
           fi
           FILE_NAME="mockgpt-$VERSION-freebsd-x86_64"
-          echo ::set-output name=FILE_NAME::$FILE_NAME
+          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
       - name: Collect assets
