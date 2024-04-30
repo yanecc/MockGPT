@@ -40,7 +40,7 @@ jobs:
       - name: Collect assets
         run: |
           mkdir mockgpt
-          mv LICENSE README.md README_zh.md src/mockgpt.cr mockgpt
+          mv LICENSE README.md README_zh.md bin/mockgpt mockgpt
 
       - name: Upload gzip artifact
         uses: nmerget/upload-gzip-artifact@v1.0.0
