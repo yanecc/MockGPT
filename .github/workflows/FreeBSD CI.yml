@@ -1,0 +1,29 @@
+name: FreeBSD CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MYTOKEN : ${{ secrets.MYTOKEN }}
+    steps:
+    - name: Download source
+      uses: actions/checkout@v4
+    - name: fetch FreeBSD-vm
+      id: test
+      uses: vmactions/freebsd-vm@v1
+      with:
+        envs: 'MYTOKEN'
+        usesh: true
+        prepare: |
+          pkg install -y crystal shards
+        run: |
+          pwd
+          ls -lah
+          whoami
+          env
+          freebsd-version
+          crystal --version
+          crystal spec --order=random
+          shards build
