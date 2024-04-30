@@ -39,15 +39,15 @@ jobs:
 
       - name: Collect assets
         run: |
-          mkdir mockgpt
-          mv LICENSE README.md README_zh.md bin/mockgpt mockgpt
+          mv bin/mockgpt .
+          tar -cvzf mockgpt-freebsd-x86_64.tgz mockgpt LICENSE README.md README_zh.md
 
-      - name: Upload gzip artifact
-        uses: nmerget/upload-gzip-artifact@main
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         id: artifact-upload-step
         with:
           name: mockgpt-freebsd-x86_64
-          path: mockgpt
+          path: mockgpt-freebsd-x86_64.tgz
           retention-days: 7
 
       - name: Output artifact id
