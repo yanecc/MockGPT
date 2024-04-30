@@ -1,6 +1,12 @@
 name: FreeBSD static build
 
 on:
+  push:
+    paths:
+      - '.github/workflows/FreeBSD Build.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/FreeBSD Build.yml'
   release:
     types: [published]
   schedule:
