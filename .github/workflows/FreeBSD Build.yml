@@ -41,7 +41,7 @@ jobs:
         id: artifact-upload-step
         with:
           name: mockgpt-freebsd-x86_64
-            path: bin/mockgpt
+          path: bin/mockgpt
 
       - name: Output artifact ID
         run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
