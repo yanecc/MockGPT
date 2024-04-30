@@ -2,26 +2,27 @@ name: FreeBSD static build
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+    tags: [ '*' ]
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday 6 AM
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     env:
-      MYTOKEN : ${{ secrets.MYTOKEN }}
+      MYTOKEN: ${{ secrets.MYTOKEN }}
 
     steps:
       - name: Download source
         uses: actions/checkout@v4
 
-      - name: build in FreeBSD-vm
+      - name: Build in FreeBSD-vm
         id: build
         uses: vmactions/freebsd-vm@v1
         with:
-          envs: 'MYTOKEN'
+          envs: "MYTOKEN"
           usesh: true
           prepare: |
             pkg install -y crystal shards
@@ -36,12 +37,18 @@ jobs:
             crystal spec --order=random
             shards build --release --no-debug --progress -Dpreview_mt --production --static
 
-      - name: Upload
-        uses: actions/upload-artifact@v4
+      - name: Collect assets
+        run: |
+          mkdir mockgpt
+          mv LICENSE README.md README_zh.md src/mockgpt.cr mockgpt
+
+      - name: Upload gzip artifact
+        uses: nmerget/upload-gzip-artifact@v1.0.0
         id: artifact-upload-step
         with:
           name: mockgpt-freebsd-x86_64
-          path: bin/mockgpt
+          path: mockgpt
+          retention-days: 7
 
-      - name: Output artifact ID
-        run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+      - name: Output artifact id
+        run: echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
