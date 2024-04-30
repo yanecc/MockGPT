@@ -27,6 +27,7 @@ jobs:
             env
             freebsd-version
             crystal version
+            shards install
             crystal spec --order=random
             shards build --release --no-debug --progress -Dpreview_mt --production --static
       - name: Location
