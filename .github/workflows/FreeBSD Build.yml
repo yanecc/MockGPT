@@ -35,7 +35,7 @@ jobs:
             crystal version
             shards install
             crystal spec --order=random
-            shards build --release --no-debug --progress -Dpreview_mt --production --static
+            shards build --release --no-debug -Dpreview_mt --production --static
 
       - name: Collect assets
         run: |
@@ -43,7 +43,7 @@ jobs:
           mv LICENSE README.md README_zh.md bin/mockgpt mockgpt
 
       - name: Upload gzip artifact
-        uses: nmerget/upload-gzip-artifact@v1.0.0
+        uses: nmerget/upload-gzip-artifact@main
         id: artifact-upload-step
         with:
           name: mockgpt-freebsd-x86_64
