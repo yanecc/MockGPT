@@ -7,23 +7,44 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MYTOKEN : ${{ secrets.MYTOKEN }}
+    outputs:
+      output1: ${{ steps.artifact-upload-step.outputs.artifact-id }}
     steps:
-    - name: Download source
-      uses: actions/checkout@v4
-    - name: fetch FreeBSD-vm
-      id: test
-      uses: vmactions/freebsd-vm@v1
-      with:
-        envs: 'MYTOKEN'
-        usesh: true
-        prepare: |
-          pkg install -y crystal shards
+      - name: Download source
+        uses: actions/checkout@v4
+      - name: fetch FreeBSD-vm
+        id: test
+        uses: vmactions/freebsd-vm@v1
+        with:
+          envs: 'MYTOKEN'
+          usesh: true
+          prepare: |
+            pkg install -y crystal shards
+          run: |
+            pwd
+            ls -lah
+            whoami
+            env
+            freebsd-version
+            crystal version
+            crystal spec --order=random
+            shards build --release --no-debug --progress -Dpreview_mt --production --static
+      - name: Location
         run: |
           pwd
           ls -lah
-          whoami
-          env
-          freebsd-version
-          crystal --version
-          crystal spec --order=random
-          shards build
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        id: artifact-upload-step
+        with:
+          name: mockgpt-freebsd-x86_64
+          path: /home/runner/work/MockGPT/MockGPT/bin/mockgpt
+
+  output:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Check Artifact ID
+        env:
+          OUTPUT1: ${{needs.build.outputs.output1}}
+        run: echo "Artifact ID from previous job is $OUTPUT1"
