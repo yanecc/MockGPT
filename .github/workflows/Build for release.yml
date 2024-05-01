@@ -28,6 +28,7 @@ jobs:
           architecture: arm64
           version: "14.0"
           shell: sh
+          shutdown_vm: false
           run: |
             pwd
             ls -lah
