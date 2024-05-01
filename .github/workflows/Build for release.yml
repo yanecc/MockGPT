@@ -66,59 +66,7 @@ jobs:
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
 
-  Linux-arm64-gnu:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download source
-        uses: actions/checkout@v4
-
-      - uses: uraimo/run-on-arch-action@v2
-        name: Build artifact
-        id: build
-        with:
-          arch: aarch64
-          distro: bookworm
-          githubToken: ${{ github.token }}
-          shell: /bin/bash
-          install: |
-            pacman -S crystal shards --noconfirm
-          run: |
-            pwd
-            crystal version
-            shards install
-            crystal spec --order=random
-            shards build --production --release --no-debug
-
-      - name: Generate file name
-        id: get_name
-        run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
-          else
-            VERSION=$(date +'%Y%m%d')
-          fi
-          FILE_NAME="mockgpt-$VERSION-linux-arm64-gnu"
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
-          echo "Generated file name: $FILE_NAME"
-
-      - name: Collect assets
-        run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        id: upload
-        with:
-          name: ${{ steps.get_name.outputs.FILE_NAME }}
-          path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
-
-      - name: Output artifact id
-        run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
-
-  Linux-arm64-musl:
+  Linux-arm64-static:
     runs-on: ubuntu-latest
 
     steps:
@@ -133,11 +81,12 @@ jobs:
           packages: >
             crystal
             shards
+            libressl-dev
+            zlib-static
 
       - name: Build in Alpine
         id: build
         run: |
-          pwd
           crystal version
           shards install
           crystal spec --order=random
@@ -152,7 +101,7 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-linux-arm64-musl"
+          FILE_NAME="mockgpt-$VERSION-linux-arm64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
