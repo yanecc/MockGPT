@@ -90,7 +90,7 @@ jobs:
           shards install
           crystal spec --order=random
           shards build --production --release --no-debug -Dpreview_mt --static
-        shell: alpine.sh {0}
+        shell: alpine-aarch64.sh {0}
 
       - name: Generate file name
         id: get_name
