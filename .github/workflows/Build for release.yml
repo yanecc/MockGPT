@@ -13,7 +13,7 @@ on:
     - cron: "0 6 * * 1" # Every Monday 6 AM
 
 jobs:
-  FreeBSD-static-x86_64:
+  FreeBSD-x86_64-static:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
             crystal version
             shards install
             crystal spec --order=random
-            shards build --production --release --no-debug -Dpreview_mt --static
+            shards build --production --release --no-debug --static
 
       - name: Generate file name
         id: get_name
@@ -66,7 +66,59 @@ jobs:
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
 
-  Linux-static-arm64:
+  Linux-arm64-gnu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+
+      - uses: uraimo/run-on-arch-action@v2
+        name: Build artifact
+        id: build
+        with:
+          arch: aarch64
+          distro: archarm_latest
+          githubToken: ${{ github.token }}
+          shell: /bin/bash
+          install: |
+            pacman -S crystal shards --noconfirm
+          run: |
+            pwd
+            crystal version
+            shards install
+            crystal spec --order=random
+            shards build --production --release --no-debug
+
+      - name: Generate file name
+        id: get_name
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION=$(date +'%Y%m%d')
+          fi
+          FILE_NAME="mockgpt-$VERSION-linux-arm64-gnu"
+          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
+          echo "Generated file name: $FILE_NAME"
+
+      - name: Collect assets
+        run: |
+          mv bin/mockgpt .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          name: ${{ steps.get_name.outputs.FILE_NAME }}
+          path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
+          retention-days: 7
+
+      - name: Output artifact id
+        run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
+
+  Linux-arm64-musl:
     runs-on: ubuntu-latest
 
     steps:
@@ -89,7 +141,7 @@ jobs:
           crystal version
           shards install
           crystal spec --order=random
-          shards build --production --release --no-debug -Dpreview_mt --static
+          shards build --production --release --no-debug
         shell: alpine-aarch64.sh {0}
 
       - name: Generate file name
@@ -100,7 +152,7 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-linux-arm64"
+          FILE_NAME="mockgpt-$VERSION-linux-arm64-musl"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
@@ -120,7 +172,7 @@ jobs:
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
 
-  Linux-static-x86_64:
+  Linux-x86_64-static:
     runs-on: ubuntu-latest
 
     container:
@@ -135,7 +187,7 @@ jobs:
           crystal version
           shards install
           crystal spec --order=random
-          shards build --production --release --no-debug -Dpreview_mt --static
+          shards build --production --release --no-debug --static
 
       - name: Generate file name
         id: get_name
@@ -182,7 +234,7 @@ jobs:
           crystal version
           shards install
           crystal spec --order=random
-          shards build --production --release --no-debug -Dpreview_mt
+          shards build --production --release --no-debug
 
       - name: Generate file name
         id: get_name
@@ -229,7 +281,7 @@ jobs:
           crystal version
           shards install
           crystal spec --order=random
-          shards build --production --release --no-debug -Dpreview_mt
+          shards build --production --release --no-debug
 
       - name: Generate file name
         id: get_name
@@ -259,7 +311,7 @@ jobs:
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
 
-  Windows-static-x86_64:
+  Windows-x86_64-static:
     runs-on: windows-latest
 
     steps:
@@ -276,7 +328,7 @@ jobs:
           crystal version
           shards install
           crystal spec --order=random
-          shards build --production --release --no-debug -Dpreview_mt --static
+          shards build --production --release --no-debug --static
 
       - name: Generate file name
         id: get_name
