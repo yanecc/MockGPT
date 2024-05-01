@@ -1,3 +1,5 @@
+[![Crystal CI](https://github.com/yanecc/MockGPT/actions/workflows/Crystal%20CI.yml/badge.svg)](https://github.com/yanecc/MockGPT/actions/workflows/Crystal%20CI.yml)
+
 # Description
 
 With the increasing number of AI applications built around OpenAI GPT, these applications provide services such as dialogue, translation, Copilot, and more.

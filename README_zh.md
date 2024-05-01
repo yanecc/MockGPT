@@ -1,3 +1,5 @@
+[![Crystal CI](https://github.com/yanecc/MockGPT/actions/workflows/Crystal%20CI.yml/badge.svg)](https://github.com/yanecc/MockGPT/actions/workflows/Crystal%20CI.yml)
+
 # 项目说明
 
 围绕OpenAI GPT建立的AI应用越来越多，这些应用提供对话、翻译、Copilot等服务。
