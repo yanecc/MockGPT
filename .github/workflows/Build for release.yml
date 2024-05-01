@@ -12,6 +12,9 @@ on:
   schedule:
     - cron: "0 6 * * 1" # Every Monday 6 AM
 
+env:
+  Executable: mockgpt
+
 jobs:
   FreeBSD-x86_64-static:
     runs-on: ubuntu-latest
@@ -46,14 +49,14 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-freebsd-x86_64"
+          FILE_NAME="$Executable-$VERSION-freebsd-x86_64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
+          mv bin/$Executable .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz $Executable LICENSE README.md README_zh.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -101,14 +104,14 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-linux-arm64"
+          FILE_NAME="$Executable-$VERSION-linux-arm64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
+          mv bin/$Executable .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz $Executable LICENSE README.md README_zh.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -146,14 +149,14 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-linux-x86_64"
+          FILE_NAME="$Executable-$VERSION-linux-x86_64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
+          mv bin/$Executable .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz $Executable LICENSE README.md README_zh.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -193,14 +196,14 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-macos-arm64"
+          FILE_NAME="$Executable-$VERSION-macos-arm64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
+          mv bin/$Executable .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz $Executable LICENSE README.md README_zh.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -240,14 +243,14 @@ jobs:
           else
             VERSION=$(date +'%Y%m%d')
           fi
-          FILE_NAME="mockgpt-$VERSION-macos-x86_64"
+          FILE_NAME="$Executable-$VERSION-macos-x86_64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
+          mv bin/$Executable .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz $Executable LICENSE README.md README_zh.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -287,14 +290,14 @@ jobs:
           } else {
             $VERSION = Get-Date -Format 'yyyyMMdd'
           }
-          $FILE_NAME = "mockgpt-$VERSION-windows-x86_64-msvc"
+          $FILE_NAME = "$Executable-$VERSION-windows-x86_64-msvc"
           Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
           Write-Host "Generated file name: $FILE_NAME"
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt.exe .
-          $sourcePath = "mockgpt.exe", "LICENSE", "README.md", "README_zh.md"
+          mv bin/$Executable.exe .
+          $sourcePath = "$Executable.exe", "LICENSE", "README.md", "README_zh.md"
           $destinationPath = "${{ steps.get_name.outputs.FILE_NAME }}.zip"
           Compress-Archive -CompressionLevel "Optimal" -Path $sourcePath -DestinationPath $destinationPath
 
