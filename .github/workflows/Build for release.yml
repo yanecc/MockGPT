@@ -296,7 +296,7 @@ jobs:
 
       - name: Collect assets
         run: |
-          mv bin/$Executable.exe .
+          mv "bin/$Executable.exe" .
           $sourcePath = "$Executable.exe", "LICENSE", "README.md", "README_zh.md"
           $destinationPath = "${{ steps.get_name.outputs.FILE_NAME }}.zip"
           Compress-Archive -CompressionLevel "Optimal" -Path $sourcePath -DestinationPath $destinationPath
