@@ -78,7 +78,7 @@ jobs:
         id: build
         with:
           arch: aarch64
-          distro: archarm_latest
+          distro: bookworm
           githubToken: ${{ github.token }}
           shell: /bin/bash
           install: |
