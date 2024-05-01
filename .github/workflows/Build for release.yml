@@ -73,22 +73,24 @@ jobs:
       - name: Download source
         uses: actions/checkout@v4
 
-      - name: Build in Alpine
-        id: build
-        uses: jirutka/setup-alpine@v1.2.0
+      - uses: jirutka/setup-alpine@v1.2.0
         with:
           branch: edge
           arch: aarch64
+          shell-name: alpine-aarch64.sh
           packages: >
             crystal
             shards
-          run: |
-            pwd
-            crystal version
-            shards install
-            crystal spec --order=random
-            shards build --production --release --no-debug -Dpreview_mt --static
-          shell: alpine.sh {0}
+
+      - name: Build in Alpine
+        id: build
+        run: |
+          pwd
+          crystal version
+          shards install
+          crystal spec --order=random
+          shards build --production --release --no-debug -Dpreview_mt --static
+        shell: alpine.sh {0}
 
       - name: Generate file name
         id: get_name
