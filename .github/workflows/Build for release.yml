@@ -146,7 +146,7 @@ jobs:
             $VERSION = Get-Date -Format 'yyyyMMdd'
           }
           $FILE_NAME = "mockgpt-$VERSION-windows-x86_64-msvc"
-          Write-Host "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
           Write-Host "Generated file name: $FILE_NAME"
 
       - name: Collect assets
