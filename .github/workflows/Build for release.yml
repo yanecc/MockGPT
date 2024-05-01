@@ -35,7 +35,7 @@ jobs:
             whoami
             env
             freebsd-version
-            pkg install -y crystal shards
+            sudo pkg install -y crystal shards
             crystal version
             shards install
             crystal spec --order=random
