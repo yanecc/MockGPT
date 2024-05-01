@@ -3,10 +3,10 @@ name: Build for release
 on:
   push:
     paths:
-      - ".github/workflows/FreeBSD Build.yml"
+      - ".github/workflows/Build for release.yml"
   pull_request:
     paths:
-      - ".github/workflows/FreeBSD Build.yml"
+      - ".github/workflows/Build for release.yml"
   release:
     types: [published]
   schedule:
