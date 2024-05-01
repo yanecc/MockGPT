@@ -151,10 +151,10 @@ jobs:
 
       - name: Collect assets
         run: |
-          mv bin/mockgpt .
-          $sourcePath = mockgpt,LICENSE,README.md,README_zh.md
-          $destinationPath = ${{ steps.get_name.outputs.FILE_NAME }}.zip
-          Compress-Archive -Path $sourcePath -DestinationPath $destinationPath
+          mv bin/mockgpt.exe .
+          $sourcePath = "mockgpt.exe", "LICENSE", "README.md", "README_zh.md"
+          $destinationPath = "${{ steps.get_name.outputs.FILE_NAME }}.zip"
+          Compress-Archive -CompressionLevel "Optimal" -Path $sourcePath -DestinationPath $destinationPath
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
