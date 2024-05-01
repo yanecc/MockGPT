@@ -13,62 +13,6 @@ on:
     - cron: "0 6 * * 1" # Every Monday 6 AM
 
 jobs:
-  FreeBSD-static-arm64:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download source
-        uses: actions/checkout@v4
-
-      - name: Build in FreeBSD-vm
-        id: build
-        uses: cross-platform-actions/action@v0.24.0
-        with:
-          operating_system: freebsd
-          architecture: arm64
-          version: "14.0"
-          shell: sh
-          shutdown_vm: false
-          run: |
-            pwd
-            ls -lah
-            whoami
-            env
-            freebsd-version
-            sudo pkg install -y crystal shards
-            crystal version
-            shards install
-            crystal spec --order=random
-            shards build --production --release --no-debug -Dpreview_mt --static
-
-      - name: Generate file name
-        id: get_name
-        run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
-          else
-            VERSION=$(date +'%Y%m%d')
-          fi
-          FILE_NAME="mockgpt-$VERSION-freebsd-arm64"
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
-          echo "Generated file name: $FILE_NAME"
-
-      - name: Collect assets
-        run: |
-          mv bin/mockgpt .
-          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz mockgpt LICENSE README.md README_zh.md
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        id: upload
-        with:
-          name: ${{ steps.get_name.outputs.FILE_NAME }}
-          path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
-
-      - name: Output artifact id
-        run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
-
   FreeBSD-static-x86_64:
     runs-on: ubuntu-latest
 
@@ -123,25 +67,28 @@ jobs:
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
 
   Linux-static-arm64:
-    runs-on: macos-latest
-
-    container:
-      image: 84codes/crystal:latest-alpine
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download source
         uses: actions/checkout@v4
 
-      - name: Build in container
-        run: |
-          pwd
-          ls -lah
-          whoami
-          env
-          crystal version
-          shards install
-          crystal spec --order=random
-          shards build --production --release --no-debug -Dpreview_mt --static
+      - name: Build in Alpine
+        id: build
+        uses: jirutka/setup-alpine@v1.2.0
+        with:
+          branch: edge
+          arch: aarch64
+          packages: >
+            crystal
+            shards
+          run: |
+            pwd
+            crystal version
+            shards install
+            crystal spec --order=random
+            shards build --production --release --no-debug -Dpreview_mt --static
+          shell: alpine.sh {0}
 
       - name: Generate file name
         id: get_name
