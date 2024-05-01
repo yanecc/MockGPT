@@ -19,7 +19,7 @@ Ollama及至少一个大模型
 
 # 安装
 
-发布页面提供了适用于Windows和Linux平台、x86_64架构、静态编译的MockGPT独立程序，若在其他平台使用，需要安装Crystal语言环境自行编译。
+发布页面提供了适用于Windows和Linux平台、x86_64架构、静态编译的MockGPT独立程序，若在其他平台使用，首先查看[Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml)，那里可能有每周构建的版本，若没有则需要安装Crystal语言环境自行编译。
 
 ``` shell
 git clone https://github.com/18183883296/MockGPT
