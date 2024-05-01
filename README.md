@@ -1,4 +1,5 @@
 [![Crystal CI](https://github.com/yanecc/MockGPT/actions/workflows/Crystal%20CI.yml/badge.svg)](https://github.com/yanecc/MockGPT/actions/workflows/Crystal%20CI.yml)
+[![Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml/badge.svg)](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml)
 
 # Description
 
