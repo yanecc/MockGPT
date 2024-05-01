@@ -41,7 +41,6 @@ jobs:
             env
             freebsd-version
             crystal version
-            shards install
             crystal spec --order=random
             shards build --production --release --no-debug -Dpreview_mt --static
 
@@ -86,7 +85,6 @@ jobs:
       - name: Build in container
         run: |
           crystal version
-          shards install
           crystal spec --order=random
           shards build --production --release --no-debug -Dpreview_mt --static
 
