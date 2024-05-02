@@ -1,5 +1,5 @@
 name: mock-gpt
-version: 1.0.0
+version: 1.1.2
 
 authors:
   - Sunrise <yane@88.com>
@@ -12,6 +12,6 @@ dependencies:
   grip:
     github: grip-framework/grip
 
-crystal: 1.11.2
+crystal: 1.12.1
 
 license: Apache-2.0
