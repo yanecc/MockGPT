@@ -31,10 +31,6 @@ jobs:
           prepare: |
             pkg install -y crystal shards
           run: |
-            pwd
-            ls -lah
-            whoami
-            env
             freebsd-version
             crystal version
             shards install
@@ -90,10 +86,11 @@ jobs:
       - name: Build in Alpine
         id: build
         run: |
+          cat /etc/os-release
           crystal version
           shards install
           crystal spec --order=random
-          shards build --production --release --no-debug
+          shards build --production --release --no-debug --static
         shell: alpine-aarch64.sh {0}
 
       - name: Generate file name
@@ -136,6 +133,7 @@ jobs:
 
       - name: Build in container
         run: |
+          cat /etc/os-release
           crystal version
           shards install
           crystal spec --order=random
