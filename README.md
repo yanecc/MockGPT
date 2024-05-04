@@ -46,7 +46,7 @@ The configuration file mocker.json can be placed in the user's home directory or
 {
     "ip": "localhost",
     "port": 3000,
-    "model": "codellama:13b"
+    "model": "llama3"
 }
 ```
 
