@@ -23,9 +23,9 @@ Ollama and at least one large model pulled.
 The release page provides statically compiled binary files for main platforms. For other platforms and architectures, check [Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml) first, you may find monthly built products from the artifacts, or will have to install the Crystal language environment and compile it yourself otherwise.
 
 ``` shell
-git clone https://github.com/18183883296/MockGPT
+git clone https://github.com/yanecc/MockGPT
 shards install
-shards build -Dpreview_mt --production
+shards build --production --release --no-debug
 ```
 
 # MockGPT Configuration

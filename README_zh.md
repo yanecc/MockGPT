@@ -22,9 +22,9 @@ Ollama及至少一个大模型
 发布页面为主流平台提供了静态编译的MockGPT程序，若在其他平台使用，首先查看[Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml)，那里可能有每月构建的版本，若没有则需要安装Crystal语言环境自行编译。
 
 ``` shell
-git clone https://github.com/18183883296/MockGPT
+git clone https://github.com/yanecc/MockGPT
 shards install
-shards build -Dpreview_mt --production
+shards build --production --release --no-debug
 ```
 
 # MockGPT配置
