@@ -300,8 +300,8 @@ jobs:
 
       - name: Create universal binary
         run: |
-          curl -L -o /usr/bin/lipo https://github.com/konoui/lipo/releases/latest/download/lipo_Linux_amd64
-          chmod +x /usr/bin/lipo
+          sudo curl -L -o /usr/bin/lipo https://github.com/konoui/lipo/releases/latest/download/lipo_Linux_amd64
+          sudo chmod +x /usr/bin/lipo
           lipo -create arm64/${{ env.Executable }} amd64/${{ env.Executable }} -output ${{ env.Executable }}
 
       - name: Collect assets
