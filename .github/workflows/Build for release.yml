@@ -363,7 +363,8 @@ jobs:
       - name: Output artifact id
         run: echo "Artifact ID is ${{ steps.upload.outputs.artifact-id }}"
 
-  publish:
+  Publish:
+    name: Publish to Releases
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     needs: [FreeBSD-x86_64-static, Linux-arm64-static, Linux-x86_64-static, Windows-x86_64-static, macOS-universal]
@@ -371,11 +372,7 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ ${{ github.event_name }} = "release" ]; then
-            VERSION=${{ github.event.release.tag_name }}
-          else
-            VERSION=$(date +"%Y%m%d")
-          fi
+          VERSION=${{ github.event.release.tag_name }}
           BSD_AMD="${{ env.Executable }}-$VERSION-freebsd-x86_64"
           LINUX_ARM="${{ env.Executable }}-$VERSION-linux-arm64"
           LINUX_AMD="${{ env.Executable }}-$VERSION-linux-x86_64"
