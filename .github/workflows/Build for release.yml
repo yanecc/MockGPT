@@ -197,20 +197,18 @@ jobs:
           $FILE_NAME = "${{ env.Executable }}-$VERSION-windows-x86_64-msvc"
           Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
           Write-Host "Generated file name: $FILE_NAME"
-
-      - name: Collect assets
-        run: |
           mv "bin/${{ env.Executable }}.exe" .
-          $sourcePath = "${{ env.Executable }}.exe", "LICENSE", "README.md", "README_zh.md"
-          $destinationPath = "${{ steps.get_name.outputs.FILE_NAME }}.zip"
-          Compress-Archive -CompressionLevel "Optimal" -Path $sourcePath -DestinationPath $destinationPath
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         id: upload
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
-          path: ${{ steps.get_name.outputs.FILE_NAME }}.zip
+          path: |
+            ${{ env.Executable }}.exe
+            LICENSE
+            README.md
+            README_zh.md
           retention-days: 31
           compression-level: 9
 
