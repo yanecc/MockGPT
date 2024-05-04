@@ -416,6 +416,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: "MockGPT v${{ github.event.release.tag_name }}"
+          allowUpdates: true
           artifactErrorsFailBuild: false
           artifacts: "${{ steps.get_name.outputs.BSD_AMD }}.tgz,${{ steps.get_name.outputs.LINUX_ARM }}.tgz,${{ steps.get_name.outputs.LINUX_AMD }}.tgz,${{ steps.get_name.outputs.WIN_AMD }}.zip,${{ steps.get_name.outputs.MAC_NAME }}.tgz"
           omitNameDuringUpdate: true
