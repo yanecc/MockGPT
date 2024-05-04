@@ -2,26 +2,29 @@ name: Crystal CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths:
+      - "src/**"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths:
+      - "src/**"
   schedule:
-    - cron: '0 6 * * 1'  # Every Monday 6 AM
+    - cron: "0 0 * * 1" # Every Monday 8 AM CST
 
 jobs:
   build:
-
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         crystal: [latest, nightly]
         include:
-          - os: ubuntu-22.04
+          - os: ubuntu-latest
             crystal: 1.8.0
 
     runs-on: ${{ matrix.os }}
-    
+
     steps:
       - name: Download source
         uses: actions/checkout@v4
