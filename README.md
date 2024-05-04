@@ -20,7 +20,7 @@ Ollama and at least one large model pulled.
 
 # Installation
 
-The release page provides a standalone MockGPT program for Windows and Linux platforms, x86_64 architecture, statically compiled. For other platforms, check [Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml) first, you may find weekly build products from the artifacts, or will have to install the Crystal language environment and compile it yourself otherwise.
+The release page provides statically compiled binary files for main platforms. For other platforms and architectures, check [Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml) first, you may find monthly built products from the artifacts, or will have to install the Crystal language environment and compile it yourself otherwise.
 
 ``` shell
 git clone https://github.com/18183883296/MockGPT

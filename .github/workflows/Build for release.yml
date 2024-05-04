@@ -10,7 +10,7 @@ on:
   release:
     types: [published]
   schedule:
-    - cron: "0 6 * * 1" # Every Monday 6 AM
+    - cron: "0 0 1 * *" # 1st of every month at 8 AM CST
 
 env:
   Executable: mockgpt
@@ -60,7 +60,7 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
           path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
+          retention-days: 31
 
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
@@ -116,7 +116,7 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
           path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
+          retention-days: 31
 
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
@@ -162,7 +162,57 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
           path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
+          retention-days: 31
+
+      - name: Output artifact id
+        run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
+
+  Windows-x86_64-static:
+    runs-on: windows-latest
+
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1.8.2
+        with:
+          crystal: latest
+
+      - name: Build
+        run: |
+          crystal version
+          shards install
+          crystal spec --order=random
+          shards build --production --release --no-debug --static
+
+      - name: Generate file name
+        id: get_name
+        run: |
+          if ("${{ github.event_name }}" -eq "release") {
+            $VERSION = $env:GITHUB_REF -replace "refs/tags/"
+          } else {
+            $VERSION = Get-Date -Format 'yyyyMMdd'
+          }
+          $FILE_NAME = "${{ env.Executable }}-$VERSION-windows-x86_64-msvc"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
+          Write-Host "Generated file name: $FILE_NAME"
+
+      - name: Collect assets
+        run: |
+          mv "bin/${{ env.Executable }}.exe" .
+          $sourcePath = "${{ env.Executable }}.exe", "LICENSE", "README.md", "README_zh.md"
+          $destinationPath = "${{ steps.get_name.outputs.FILE_NAME }}.zip"
+          Compress-Archive -CompressionLevel "Optimal" -Path $sourcePath -DestinationPath $destinationPath
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          name: ${{ steps.get_name.outputs.FILE_NAME }}
+          path: ${{ steps.get_name.outputs.FILE_NAME }}.zip
+          retention-days: 31
+          compression-level: 9
 
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
@@ -209,7 +259,7 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
           path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
+          retention-days: 31
 
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
@@ -256,7 +306,7 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
           path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
+          retention-days: 31
 
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
@@ -315,57 +365,7 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.FILE_NAME }}
           path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
-          retention-days: 7
-
-      - name: Output artifact id
-        run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
-
-  Windows-x86_64-static:
-    runs-on: windows-latest
-
-    steps:
-      - name: Download source
-        uses: actions/checkout@v4
-
-      - name: Install Crystal
-        uses: crystal-lang/install-crystal@v1.8.2
-        with:
-          crystal: latest
-
-      - name: Build
-        run: |
-          crystal version
-          shards install
-          crystal spec --order=random
-          shards build --production --release --no-debug --static
-
-      - name: Generate file name
-        id: get_name
-        run: |
-          if ("${{ github.event_name }}" -eq "release") {
-            $VERSION = $env:GITHUB_REF -replace "refs/tags/"
-          } else {
-            $VERSION = Get-Date -Format 'yyyyMMdd'
-          }
-          $FILE_NAME = "${{ env.Executable }}-$VERSION-windows-x86_64-msvc"
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
-          Write-Host "Generated file name: $FILE_NAME"
-
-      - name: Collect assets
-        run: |
-          mv "bin/${{ env.Executable }}.exe" .
-          $sourcePath = "${{ env.Executable }}.exe", "LICENSE", "README.md", "README_zh.md"
-          $destinationPath = "${{ steps.get_name.outputs.FILE_NAME }}.zip"
-          Compress-Archive -CompressionLevel "Optimal" -Path $sourcePath -DestinationPath $destinationPath
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        id: upload
-        with:
-          name: ${{ steps.get_name.outputs.FILE_NAME }}
-          path: ${{ steps.get_name.outputs.FILE_NAME }}.zip
-          retention-days: 7
-          compression-level: 9
+          retention-days: 31
 
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
