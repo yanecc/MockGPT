@@ -40,3 +40,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           omitPrereleaseDuringUpdate: true
+          token: ${{ secrets.GITHUB_TOKEN }}
