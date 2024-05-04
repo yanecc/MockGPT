@@ -40,8 +40,8 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [ ${{ github.event_name }} = "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
           else
             VERSION=$(date +'%Y%m%d')
           fi
@@ -96,8 +96,8 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [ ${{ github.event_name }} = "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
           else
             VERSION=$(date +'%Y%m%d')
           fi
@@ -142,8 +142,8 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [ ${{ github.event_name }} = "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
           else
             VERSION=$(date +'%Y%m%d')
           fi
@@ -189,10 +189,10 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if ("${{ github.event_name }}" -eq "release") {
-            $VERSION = $env:GITHUB_REF -replace "refs/tags/"
+          if (${{ github.event_name }} -eq "release") {
+            $VERSION = ${{ github.event.release.tag_name }}
           } else {
-            $VERSION = Get-Date -Format 'yyyyMMdd'
+            $VERSION = Get-Date -Format "yyyyMMdd"
           }
           $FILE_NAME = "${{ env.Executable }}-$VERSION-windows-x86_64-msvc"
           Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
@@ -239,8 +239,8 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [ ${{ github.event_name }} = "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
           else
             VERSION=$(date +'%Y%m%d')
           fi
@@ -286,8 +286,8 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [ ${{ github.event_name }} = "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
           else
             VERSION=$(date +'%Y%m%d')
           fi
@@ -318,8 +318,8 @@ jobs:
       - name: Generate file name
         id: get_name
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [ ${{ github.event_name }} = "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
           else
             VERSION=$(date +'%Y%m%d')
           fi
