@@ -364,7 +364,7 @@ jobs:
         run: echo "Artifact ID is ${{ steps.upload.outputs.artifact-id }}"
 
   publish:
-    if: github.event_name == "release"
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     needs: [FreeBSD-x86_64-static, Linux-arm64-static, Linux-x86_64-static, Windows-x86_64-static, macOS-universal]
     steps:
