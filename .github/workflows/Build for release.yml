@@ -261,6 +261,65 @@ jobs:
       - name: Output artifact id
         run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
 
+  macOS-universal:
+    needs: [macOS-arm64, macOS-x86_64]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate file name
+        id: get_name
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION=$(date +'%Y%m%d')
+          fi
+          ARM_NAME="${{ env.Executable }}-$VERSION-macos-arm64"
+          AMD_NAME="${{ env.Executable }}-$VERSION-macos-x86_64"
+          FILE_NAME="${{ env.Executable }}-$VERSION-macos-universal"
+          echo "ARM_NAME=$ARM_NAME" >> $GITHUB_OUTPUT
+          echo "AMD_NAME=$AMD_NAME" >> $GITHUB_OUTPUT
+          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
+          echo "Generated file name: $FILE_NAME"
+
+      - name: Download artifact from macOS-arm64
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.get_name.outputs.ARM_NAME }}
+          path: arm64
+
+      - name: Download artifact from macOS-x86_64
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.get_name.outputs.AMD_NAME }}
+          path: amd64
+
+      - name: Extract artifacts
+        run: |
+          tar -xvzf arm64/${{ steps.get_name.outputs.ARM_NAME }}.tgz -C arm64
+          tar -xvzf amd64/${{ steps.get_name.outputs.AMD_NAME }}.tgz -C amd64
+
+      - name: Create universal binary
+        run: |
+          curl -L -o /usr/bin/lipo https://github.com/konoui/lipo/releases/latest/download/lipo_Linux_amd64
+          chmod +x /usr/bin/lipo
+          lipo -create arm64/${{ env.Executable }} amd64/${{ env.Executable }} -output ${{ env.Executable }}
+
+      - name: Collect assets
+        run: |
+          mv amd64/LICENSE amd64/README.md amd64/README_zh.md .
+          tar -cvzf ${{ steps.get_name.outputs.FILE_NAME }}.tgz ${{ env.Executable }} LICENSE README.md README_zh.md
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          name: ${{ steps.get_name.outputs.FILE_NAME }}
+          path: ${{ steps.get_name.outputs.FILE_NAME }}.tgz
+          retention-days: 7
+
+      - name: Output artifact id
+        run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
+
   Windows-x86_64-static:
     runs-on: windows-latest
 
