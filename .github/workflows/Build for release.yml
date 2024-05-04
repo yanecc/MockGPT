@@ -412,6 +412,10 @@ jobs:
         with:
           name: ${{ steps.get_name.outputs.MAC_NAME }}
 
+      - name: Show assets
+        run: |
+          ls
+
       - name: Publish to Releases
         uses: ncipollo/release-action@v1
         with:
