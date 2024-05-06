@@ -21,6 +21,7 @@ if File.file?(confPath)
   Mocker.host = mocker["host"].as_s if mocker["host"]?
   Mocker.port = mocker["port"].as_i if mocker["port"]?
   Mocker.model = mocker["model"].as_s if mocker["model"]?
+  Mocker.gpt = mocker["gpt"].as_s if mocker["gpt"]?
 end
 
 COMMANDS_VERSION = <<-VERSION
