@@ -23,17 +23,17 @@ Ollama及至少一个大模型
 
 ``` shell
 # Linux arm64
-sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-arm64
-sudo chmod +x /usr/bin/mockgpt
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-arm64
+sudo chmod +x /usr/local/bin/mockgpt
 # Linux x86_64
-sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-x86_64
-sudo chmod +x /usr/bin/mockgpt
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
 # macOS arm64/x86_64
 sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-macos-universal
 sudo chmod +x /usr/bin/mockgpt
 # FreeBSD x86_64
-sudo fetch -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-freebsd-x86_64
-sudo chmod +x /usr/bin/mockgpt
+sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-freebsd-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
 ```
 
 [发布页面](https://github.com/yanecc/MockGPT/releases/latest)为主流平台提供了静态编译的MockGPT程序和发行包，若在其他平台使用，首先查看[Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml)，那里可能有每月构建的版本，若没有则需要安装Crystal语言环境自行编译。

@@ -24,17 +24,17 @@ Quick start on Linux, macOS, and FreeBSD (root required):
 
 ``` shell
 # Linux arm64
-sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-arm64
-sudo chmod +x /usr/bin/mockgpt
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-arm64
+sudo chmod +x /usr/local/bin/mockgpt
 # Linux x86_64
-sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-x86_64
-sudo chmod +x /usr/bin/mockgpt
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
 # macOS arm64/x86_64
 sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-macos-universal
 sudo chmod +x /usr/bin/mockgpt
 # FreeBSD x86_64
-sudo fetch -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-freebsd-x86_64
-sudo chmod +x /usr/bin/mockgpt
+sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-freebsd-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
 ```
 
 The [releases page](https://github.com/yanecc/MockGPT/releases/latest) provides statically compiled binary files and release packages for main platforms. For other platforms and architectures, check [Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml) first, you may find monthly built products from the artifacts, or will have to install the Crystal language environment and compile it yourself otherwise.
