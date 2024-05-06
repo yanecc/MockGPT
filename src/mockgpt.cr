@@ -7,7 +7,7 @@ require "./mockgpt/*"
 require "./mockgpt/struct/*"
 
 module Mocker
-  class_property ip : String = "localhost"
+  class_property host : String = "localhost"
   class_property port : Int32 = 3000
   class_property model : String = "llama3"
   class_property gpt : String = "gpt-4"
@@ -18,14 +18,21 @@ exePath = "#{File.dirname Process.executable_path.not_nil!}/mocker.json"
 confPath = File.exists?(exePath) ? exePath : homePath
 if File.file?(confPath)
   mocker = JSON.parse(File.read(confPath))
-  Mocker.ip = mocker["ip"].as_s if mocker["ip"]?
+  Mocker.host = mocker["host"].as_s if mocker["host"]?
   Mocker.port = mocker["port"].as_i if mocker["port"]?
   Mocker.model = mocker["model"].as_s if mocker["model"]?
 end
 
+COMMANDS_VERSION = <<-VERSION
+  MockGPT v1.2.1
+
+  GitHub:   https://github.com/yanecc/mockgpt
+  Codeberg: https://codeberg.org/sunrise/mockgpt
+  VERSION
+
 OptionParser.parse do |parser|
   parser.banner = "Usage: mockgpt [arguments]"
-  parser.on("-b HOST", "--binding HOST", "Bind to the specified IP") { |_host| Mocker.ip = _host }
+  parser.on("-b HOST", "--binding HOST", "Bind to the specified host") { |_host| Mocker.host = _host }
   parser.on("-p PORT", "--port PORT", "Run on the specified port") { |_port| Mocker.port = _port.to_i }
   parser.on("-m MODEL", "--mocker MODEL", "Employ the specified model") { |_model| Mocker.model = _model }
   parser.on("-h", "--help", "Show this help") do
@@ -33,10 +40,11 @@ OptionParser.parse do |parser|
     exit
   end
   parser.on("-v", "--version", "Print the version") do
-    puts "MockGPT v1.2.1"
-    puts
-    puts "GitHub:   https://github.com/yanecc/mockgpt"
-    puts "Codeberg: https://codeberg.org/sunrise/mockgpt"
+    puts COMMANDS_VERSION
+    exit
+  end
+  parser.on("version", "Print the version") do
+    puts COMMANDS_VERSION
     exit
   end
   parser.invalid_option do |flag|
@@ -46,5 +54,5 @@ OptionParser.parse do |parser|
   end
 end
 
-mockgpt = Application.new(Mocker.ip, Mocker.port)
+mockgpt = Application.new(Mocker.host, Mocker.port)
 mockgpt.run
