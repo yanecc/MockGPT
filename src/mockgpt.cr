@@ -32,6 +32,13 @@ OptionParser.parse do |parser|
     puts parser
     exit
   end
+  parser.on("-v", "--version", "Print the version") do
+    puts "MockGPT v1.2.1"
+    puts
+    puts "GitHub:   https://github.com/yanecc/mockgpt"
+    puts "Codeberg: https://codeberg.org/sunrise/mockgpt"
+    exit
+  end
   parser.invalid_option do |flag|
     STDERR.puts "ERROR: #{flag} is not a valid option."
     STDERR.puts parser
