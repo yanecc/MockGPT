@@ -27,8 +27,8 @@ end
 COMMANDS_VERSION = <<-VERSION
   MockGPT v1.2.1
 
-  GitHub:   https://github.com/yanecc/mockgpt
-  Codeberg: https://codeberg.org/sunrise/mockgpt
+  GitHub:  \t https://github.com/yanecc/mockgpt
+  Codeberg:\t https://codeberg.org/sunrise/mockgpt
   VERSION
 
 OptionParser.parse do |parser|
@@ -46,6 +46,13 @@ OptionParser.parse do |parser|
   end
   parser.on("version", "Print the version") do
     puts COMMANDS_VERSION
+    exit
+  end
+  parser.on("config", "Display the configuration in effect") do
+    puts "Host \t: #{Mocker.host}"
+    puts "Port \t: #{Mocker.port}"
+    puts "Model\t: #{Mocker.model}"
+    puts "GPT  \t: #{Mocker.gpt}"
     exit
   end
   parser.invalid_option do |flag|
