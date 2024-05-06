@@ -47,6 +47,19 @@ jobs:
           FILE_NAME="${{ env.Executable }}-$VERSION-freebsd-x86_64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
+          cp bin/${{ env.Executable }} ${{ env.Executable }}-freebsd-x86_64
+
+      - name: Publish to Releases
+        if: github.event_name == 'release'
+        uses: ncipollo/release-action@v1
+        with:
+          name: "MockGPT v${{ github.event.release.tag_name }}"
+          allowUpdates: true
+          artifacts: "${{ env.Executable }}-freebsd-x86_64"
+          artifactErrorsFailBuild: false
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
 
       - name: Collect assets
         run: |
@@ -102,6 +115,19 @@ jobs:
           FILE_NAME="${{ env.Executable }}-$VERSION-linux-arm64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
+          cp bin/${{ env.Executable }} ${{ env.Executable }}-linux-arm64
+
+      - name: Publish to Releases
+        if: github.event_name == 'release'
+        uses: ncipollo/release-action@v1
+        with:
+          name: "MockGPT v${{ github.event.release.tag_name }}"
+          allowUpdates: true
+          artifacts: "${{ env.Executable }}-linux-arm64"
+          artifactErrorsFailBuild: false
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
 
       - name: Collect assets
         run: |
@@ -146,6 +172,19 @@ jobs:
           FILE_NAME="${{ env.Executable }}-$VERSION-linux-x86_64"
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
           echo "Generated file name: $FILE_NAME"
+          cp bin/${{ env.Executable }} ${{ env.Executable }}-linux-x86_64
+
+      - name: Publish to Releases
+        if: github.event_name == 'release'
+        uses: ncipollo/release-action@v1
+        with:
+          name: "MockGPT v${{ github.event.release.tag_name }}"
+          allowUpdates: true
+          artifacts: "${{ env.Executable }}-linux-x86_64"
+          artifactErrorsFailBuild: false
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
 
       - name: Collect assets
         run: |
@@ -346,6 +385,18 @@ jobs:
           sudo curl -L -o /usr/bin/lipo https://github.com/konoui/lipo/releases/latest/download/lipo_Linux_amd64
           sudo chmod +x /usr/bin/lipo
           lipo -create arm64/${{ env.Executable }} amd64/${{ env.Executable }} -output ${{ env.Executable }}
+
+      - name: Publish to Releases
+        if: github.event_name == 'release'
+        uses: ncipollo/release-action@v1
+        with:
+          name: "MockGPT v${{ github.event.release.tag_name }}"
+          allowUpdates: true
+          artifacts: "${{ env.Executable }}-macos-universal"
+          artifactErrorsFailBuild: false
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
 
       - name: Collect assets
         run: |
