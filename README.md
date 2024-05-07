@@ -73,6 +73,16 @@ The configuration file mocker.json can be placed in the user's home directory or
 
 The default configuration above is used if no parameters are provided.
 
+## Subcommands
+
+```
+Usage: mockgpt <subcommand>/<options> <arguments>
+
+config                           Display the configuration in effect
+upgrade                          Upgrade to the latest version
+version                          Print the version
+```
+
 ## Options
 
 ```

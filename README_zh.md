@@ -70,7 +70,17 @@ shards build --production --release --no-debug
 }
 ```
 
-以上为无参数运行时的默认配置
+以上为无参数运行时的默认配置。
+
+## 子命令
+
+```
+Usage: mockgpt <subcommand>/<options> <arguments>
+
+config                           Display the configuration in effect
+upgrade                          Upgrade to the latest version
+version                          Print the version
+```
 
 ## 运行时参数
 
