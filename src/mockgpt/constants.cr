@@ -1,10 +1,12 @@
-VERSION          = "1.2.1"
+VERSION = "1.2.1"
+
 COMMANDS_VERSION = <<-VERSION
 MockGPT v#{VERSION}
 
 GitHub:  \t https://github.com/yanecc/mockgpt
 Codeberg:\t https://codeberg.org/sunrise/mockgpt
 VERSION
+
 CONFIG_HELP = <<-CONFIG
 Usage: mockgpt config [rm] <name> <value>
 

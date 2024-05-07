@@ -293,6 +293,19 @@ jobs:
           $FILE_NAME = "${{ env.Executable }}-$VERSION-windows-x86_64-msvc"
           Add-Content -Path $env:GITHUB_OUTPUT -Value "FILE_NAME=$FILE_NAME"
           Write-Host "Generated file name: $FILE_NAME"
+          Copy-Item "bin/${{ env.Executable }}" "${{ env.Executable }}-windows-x86_64"
+
+      - name: Publish to Releases
+        if: github.event_name == 'release'
+        uses: ncipollo/release-action@v1
+        with:
+          name: "MockGPT v${{ github.event.release.tag_name }}"
+          allowUpdates: true
+          artifacts: "${{ env.Executable }}-windows-x86_64"
+          artifactErrorsFailBuild: false
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
 
       - name: Collect assets
         run: |

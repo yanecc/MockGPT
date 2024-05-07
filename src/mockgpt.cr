@@ -6,13 +6,6 @@ require "option_parser"
 require "./mockgpt/*"
 require "./mockgpt/struct/*"
 
-module Mocker
-  class_property host : String = "localhost"
-  class_property port : Int32 = 3000
-  class_property model : String = "llama3"
-  class_property gpt : String = "gpt-4"
-end
-
 homePath = "#{Path.home}/mocker.json"
 exePath = "#{File.dirname Process.executable_path.not_nil!}/mocker.json"
 confPath = File.exists?(exePath) ? exePath : homePath
@@ -63,14 +56,24 @@ OptionParser.parse do |parser|
         when "gpt"
           puts Mocker.gpt
         else
-          STDERR.puts "Undefined option: #{args[1]}", parser
+          STDERR.puts "Undefined option: #{args[1]}", CONFIG_HELP
         end
       else
-        STDERR.puts "Undefined option: #{args[1]}", parser
+        STDERR.puts "Undefined option: #{args[1]}", CONFIG_HELP
       end
-
       exit
     end
+  end
+  parser.on("upgrade", "Upgrade to the latest version") do
+    url = "https://github.com/yanecc/MockGPT/tags"
+    pattern = /href="\/yanecc\/MockGPT\/releases\/tag\/([0-9.]+)"/
+    latestVersion = Utils.getLatestVersion(url, pattern)
+    if latestVersion == VERSION
+      puts "Already up to date."
+    else
+      Commands.upgrade if Utils.confirmUpgrade latestVersion
+    end
+    exit
   end
   parser.on("version", "Print the version") do
     puts COMMANDS_VERSION
@@ -90,7 +93,7 @@ OptionParser.parse do |parser|
   parser.invalid_option do |flag|
     STDERR.puts "ERROR: #{flag} is not a valid option."
     STDERR.puts parser
-    exit(1)
+    exit 1
   end
 end
 
