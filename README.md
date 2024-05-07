@@ -76,16 +76,18 @@ The default configuration above is used if no parameters are provided.
 ## Options
 
 ```
--b HOST, --binding HOST          Bind to the specified IP
+-b HOST, --binding HOST          Bind to the specified host
 -p PORT, --port PORT             Run on the specified port
 -m MODEL, --mocker MODEL         Employ the specified model
 -h, --help                       Show this help
+-v, --version                    Print the version
 ```
 
-`-b`：Bind to the specified IP<br>
-`-p`：Run on the specified port<br>
-`-m`：Employ the specified model (Full name)<br>
-`-h`：Show this help
+`-b`: Bind to the specified IP<br>
+`-p`: Run on the specified port<br>
+`-m`: Employ the specified model (Full name)<br>
+`-h`: Show this help<br>
+`-v`: Print MockGPT's version
 
 # Usage
 

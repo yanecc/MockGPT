@@ -4,9 +4,13 @@ module Utils
   def getLatestVersion(url : String, pattern : Regex) : String
     response = HTTP::Client.get(url)
     if response.status_code == 200
-      response.body.to_s.match!(pattern)[1]
+      {% if compare_versions(Crystal::VERSION, "1.9.0") >= 0 %}
+        return response.body.to_s.match!(pattern)[1]
+      {% else %}
+        return response.body.to_s.match(pattern)[1] || raise("Failed to match available versions.")
+      {% end %}
     else
-      puts "Failed to get latest version: #{response.status_code}"
+      puts "Failed to get latest version: #{response.status_message}"
       exit(1)
     end
   end
@@ -20,7 +24,7 @@ module Utils
           url = location
           Log.debug { "Redirected to #{url}" }
         else
-          abort "Got status #{response.status_code}, but no location was sent"
+          abort "Got status #{response.status_code}, but no location was sent."
         end
         download(url, dest)
       else

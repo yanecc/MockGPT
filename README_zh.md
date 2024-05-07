@@ -79,12 +79,14 @@ shards build --production --release --no-debug
 -p PORT, --port PORT             Run on the specified port
 -m MODEL, --mocker MODEL         Employ the specified model
 -h, --help                       Show this help
+-v, --version                    Print the version
 ```
 
 `-b`：MockGPT监听的IP地址<br>
 `-p`：MockGPT监听的端口号<br>
 `-m`：MockGPT请求的模型**全称**<br>
-`-h`：使用帮助
+`-h`：使用帮助<br>
+`-v`：打印MockGPT的版本
 
 # 使用方法
 
