@@ -90,7 +90,7 @@ jobs:
           release: "7.3"
           usesh: true
           prepare: |
-            pkg_add crystal
+            pkg_add crystal git
           run: |
             crystal version
             shards install
