@@ -1,5 +1,6 @@
+VERSION          = "1.2.1"
 COMMANDS_VERSION = <<-VERSION
-MockGPT v1.2.1
+MockGPT v#{VERSION}
 
 GitHub:  \t https://github.com/yanecc/mockgpt
 Codeberg:\t https://codeberg.org/sunrise/mockgpt

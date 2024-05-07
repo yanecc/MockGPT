@@ -20,7 +20,7 @@ Ollama and at least one large model pulled.
 
 # Installation
 
-Quick start on Linux, macOS, and FreeBSD (root required):
+Quick start on Linux, macOS, FreeBSD, and OpenBSD (root required):
 
 ``` shell
 # Linux arm64
@@ -34,6 +34,9 @@ sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/late
 sudo chmod +x /usr/bin/mockgpt
 # FreeBSD x86_64
 sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-freebsd-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
+# OpenBSD x86_64
+sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-openbsd-x86_64
 sudo chmod +x /usr/local/bin/mockgpt
 ```
 
