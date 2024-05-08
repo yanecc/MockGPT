@@ -114,9 +114,9 @@ Example:
   mockgpt config rm port gpt
 
 Options:
-  rm                             Reset a configuration to the default value
   all                            Display all configurations, same as mockgpt config
-  init                           Initialize the configuration file if not exist
+  init                           Generate the configuration file if not exist
+  rm                             Reset a configuration to the default value
   -h, --help                     Show this help for config
 ```
 

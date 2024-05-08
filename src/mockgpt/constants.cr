@@ -18,8 +18,8 @@ Example:
   mockgpt config rm port gpt
 
 Options:
-  rm          \t Reset a configuration to the default value
   all         \t Display all configurations, same as mockgpt config
   init        \t Generate the configuration file if not exist
+  rm          \t Reset a configuration to the default value
   -h, --help  \t Show this help for config
 CONFIG
