@@ -46,7 +46,7 @@ sudo chmod +x /usr/local/bin/mockgpt
 
 ``` shell
 git clone https://github.com/yanecc/MockGPT
-shards install
+cd MockGPT
 shards build --production --release --no-debug
 ```
 

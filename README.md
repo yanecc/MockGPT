@@ -47,7 +47,7 @@ The [releases page](https://github.com/yanecc/MockGPT/releases/latest) provides 
 
 ``` shell
 git clone https://github.com/yanecc/MockGPT
-shards install
+cd MockGPT
 shards build --production --release --no-debug
 ```
 
