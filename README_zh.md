@@ -101,6 +101,27 @@ version                          Print the version
 `-h`：使用帮助<br>
 `-v`：打印MockGPT的版本
 
+## Config 子命令
+
+```
+Usage: mockgpt config [rm] <name> <value>
+
+Example:
+  mockgpt config [all]
+  mockgpt config init
+  mockgpt config port
+  mockgpt config port 8080
+  mockgpt config rm port gpt
+
+Options:
+  rm                             Reset a configuration to the default value
+  all                            Display all configurations, same as mockgpt config
+  init                           Initialize the configuration file if not exist
+  -h, --help                     Show this help for config
+```
+
+config子命令提供了展示、修改、删除（重置）配置的功能，用于便捷地修改配置文件。建议在首次启动服务前运行`mockgpt config init`，这将在用户主目录生成配置文件`mocker.json`。如果需要，也可以将配置文件移动到程序目录。
+
 # 使用方法
 
 1. 启动Ollama及MockGPT服务

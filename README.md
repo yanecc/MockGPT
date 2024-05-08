@@ -102,6 +102,27 @@ version                          Print the version
 `-h`: Show this help<br>
 `-v`: Print MockGPT's version
 
+## Config subcommand
+
+```
+Usage: mockgpt config [rm] <name> <value>
+
+Example:
+  mockgpt config [all]
+  mockgpt config init
+  mockgpt config port
+  mockgpt config port 8080
+  mockgpt config rm port gpt
+
+Options:
+  rm                             Reset a configuration to the default value
+  all                            Display all configurations, same as mockgpt config
+  init                           Initialize the configuration file if not exist
+  -h, --help                     Show this help for config
+```
+
+The config subcommand provides functions to display, modify, and delete (reset) configurations, making it easy to modify the configuration file. It is recommended to run `mockgpt config init` before starting the service for the first time, which will generate the configuration file mocker.json in the user's home directory. You could move the file to the program directory if you want to keep it there.
+
 # Usage
 
 1. Start Ollama and MockGPT services.
