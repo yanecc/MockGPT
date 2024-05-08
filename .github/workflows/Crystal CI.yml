@@ -5,10 +5,12 @@ on:
     branches: ["main"]
     paths:
       - "src/**"
+      - ".github/workflows/Crystal CI.yml"
   pull_request:
     branches: ["main"]
     paths:
       - "src/**"
+      - ".github/workflows/Crystal CI.yml"
   schedule:
     - cron: "0 0 * * 1" # Every Monday 8 AM CST
 
