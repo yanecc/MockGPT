@@ -68,7 +68,7 @@ shards build --production --release --no-debug
 {
     "ip": "localhost",
     "port": 3000,
-    "model": "llama3"
+    "model": "llama3",
     "gpt": "gpt-4"
 }
 ```
