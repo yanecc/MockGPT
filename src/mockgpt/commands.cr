@@ -9,7 +9,7 @@ module Commands
     {% if flag?(:windows) && flag?(:x86_64) %}
       File.rename(exePath, tempPath)
       batchPath = File.join(File.dirname(exePath), ".upgrade.bat")
-      url = "https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-windows-x86_64.exe"
+      url = "https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-windows-x86_64.exe"
 
       wait_channel = Channel(Nil).new
       Process.on_terminate do |reason|
@@ -50,7 +50,7 @@ module Commands
         exit 1
       end
     {% else %}
-      url = "https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-"
+      url = "https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-"
       {% if flag?(:darwin) %}
         url += "macos-universal"
       {% elsif flag?(:freebsd) && flag?(:x86_64) %}

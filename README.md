@@ -24,23 +24,23 @@ Quick start on Linux, macOS, FreeBSD and OpenBSD (root required):
 
 ``` shell
 # macOS arm64/x86_64
-sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-macos-universal
+sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-macos-universal
 sudo chmod +x /usr/bin/mockgpt
 # Linux arm64
-sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-arm64
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-linux-arm64
 sudo chmod +x /usr/local/bin/mockgpt
 # Linux x86_64
-sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-linux-x86_64
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-linux-x86_64
 sudo chmod +x /usr/local/bin/mockgpt
 # FreeBSD x86_64
-sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-freebsd-x86_64
+sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-freebsd-x86_64
 sudo chmod +x /usr/local/bin/mockgpt
 # OpenBSD x86_64
-sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/latest/download/mockgpt-openbsd-x86_64
+sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-openbsd-x86_64
 sudo chmod +x /usr/local/bin/mockgpt
 ```
 
-The [releases page](https://github.com/yanecc/MockGPT/releases/latest) provides statically compiled binary files and release packages for main platforms. For other platforms and architectures, check [Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml) first, you may find monthly built products from the artifacts, or will have to install the Crystal language environment and compile it yourself otherwise.
+The [releases page](https://github.com/yanecc/MockGPT/releases/latest) provides statically compiled release packages for main platforms. For other platforms and architectures, check [Build for release](https://github.com/yanecc/MockGPT/actions/workflows/Build%20for%20release.yml) first, you may find monthly built products from the artifacts, or will have to install the Crystal language environment and compile it yourself otherwise.
 
 ``` shell
 git clone https://github.com/yanecc/MockGPT

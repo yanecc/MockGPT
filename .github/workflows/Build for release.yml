@@ -53,7 +53,8 @@ jobs:
         if: github.event_name == 'release'
         uses: ncipollo/release-action@v1
         with:
-          name: "MockGPT v${{ github.event.release.tag_name }}"
+          name: "Latest Executables"
+          tag: "latest"
           allowUpdates: true
           artifacts: "${{ env.Executable }}-freebsd-x86_64"
           artifactErrorsFailBuild: false
@@ -116,7 +117,8 @@ jobs:
         if: github.event_name == 'release'
         uses: ncipollo/release-action@v1
         with:
-          name: "MockGPT v${{ github.event.release.tag_name }}"
+          name: "Latest Executables"
+          tag: "latest"
           allowUpdates: true
           artifacts: "${{ env.Executable }}-openbsd-x86_64"
           artifactErrorsFailBuild: false
@@ -184,7 +186,8 @@ jobs:
         if: github.event_name == 'release'
         uses: ncipollo/release-action@v1
         with:
-          name: "MockGPT v${{ github.event.release.tag_name }}"
+          name: "Latest Executables"
+          tag: "latest"
           allowUpdates: true
           artifacts: "${{ env.Executable }}-linux-arm64"
           artifactErrorsFailBuild: false
@@ -241,7 +244,8 @@ jobs:
         if: github.event_name == 'release'
         uses: ncipollo/release-action@v1
         with:
-          name: "MockGPT v${{ github.event.release.tag_name }}"
+          name: "Latest Executables"
+          tag: "latest"
           allowUpdates: true
           artifacts: "${{ env.Executable }}-linux-x86_64"
           artifactErrorsFailBuild: false
@@ -300,7 +304,8 @@ jobs:
         if: github.event_name == 'release'
         uses: ncipollo/release-action@v1
         with:
-          name: "MockGPT v${{ github.event.release.tag_name }}"
+          name: "Latest Executables"
+          tag: "latest"
           allowUpdates: true
           artifacts: "${{ env.Executable }}-windows-x86_64.exe"
           artifactErrorsFailBuild: false
@@ -467,7 +472,8 @@ jobs:
         if: github.event_name == 'release'
         uses: ncipollo/release-action@v1
         with:
-          name: "MockGPT v${{ github.event.release.tag_name }}"
+          name: "Latest Executables"
+          tag: "latest"
           allowUpdates: true
           artifacts: "${{ env.Executable }}-macos-universal"
           artifactErrorsFailBuild: false
