@@ -460,6 +460,7 @@ jobs:
           sudo curl -L -o /usr/bin/lipo https://github.com/konoui/lipo/releases/latest/download/lipo_Linux_amd64
           sudo chmod +x /usr/bin/lipo
           lipo -create arm64/${{ env.Executable }} amd64/${{ env.Executable }} -output ${{ env.Executable }}
+          cp ${{ env.Executable }} ${{ env.Executable }}-macos-universal
 
       - name: Publish to Releases
         if: github.event_name == 'release'
