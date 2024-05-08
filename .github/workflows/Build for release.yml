@@ -92,7 +92,7 @@ jobs:
           prepare: |
             pkg_add crystal git
           run: |
-            sed -i '' '/github: grip-framework\/grip/a \ \ \ \ version: 2.0.1' shard.yml
+            sed -i '' '/github: grip-framework\/grip/a\ \ \ \ version: 2.0.1' shard.yml
             crystal version
             shards install
             crystal spec --order=random
