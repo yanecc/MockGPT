@@ -7,7 +7,7 @@ module Utils
       {% if compare_versions(Crystal::VERSION, "1.9.0") >= 0 %}
         return response.body.to_s.match!(pattern)[1]
       {% else %}
-        return response.body.to_s.match(pattern).try(&.[1]) || raise("Failed to match available versions.")
+        return response.body.to_s.match(pattern).try &.[1] || raise("Failed to match available versions.")
       {% end %}
     else
       puts "Failed to get latest version: #{response.status_message}"

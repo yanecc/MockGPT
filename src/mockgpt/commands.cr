@@ -16,7 +16,11 @@ module Commands
         case reason
         when .interrupted?
           File.rename(tempPath, exePath)
-          Crystal::System::File.delete(batchPath, raise_on_missing: false)
+          {% if compare_versions(Crystal::VERSION, "1.5.0") >= 0 %}
+            File.delete? batchPath
+          {% else %}
+            File.delete batchPath if File.exists? batchPath
+          {% end %}
           wait_channel.close
         end
       end
@@ -36,7 +40,11 @@ module Commands
         wait_channel.receive
         Process.exec("cmd.exe", ["/C", batchPath])
       else
-        Crystal::System::File.delete(exePath, raise_on_missing: false)
+        {% if compare_versions(Crystal::VERSION, "1.5.0") >= 0 %}
+          File.delete? exePath
+        {% else %}
+          File.delete exePath if File.exists? exePath
+        {% end %}
         File.rename(tempPath, exePath)
         puts "Upgrade failed. Please try again."
         exit 1
@@ -62,7 +70,11 @@ module Commands
       if File.executable?(tempPath)
         File.rename(tempPath, exePath)
       else
-        Crystal::System::File.delete(tempPath, raise_on_missing: false)
+        {% if compare_versions(Crystal::VERSION, "1.5.0") >= 0 %}
+          File.delete? tempPath
+        {% else %}
+          File.delete tempPath if File.exists? tempPath
+        {% end %}
       end
     {% end %}
   end
