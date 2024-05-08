@@ -16,7 +16,7 @@ module Commands
         case reason
         when .interrupted?
           File.rename(tempPath, exePath)
-          File.delete? batchPath
+          Crystal::System::File.delete(batchPath, raise_on_missing: false)
           wait_channel.close
         end
       end
@@ -36,7 +36,7 @@ module Commands
         wait_channel.receive
         Process.exec("cmd.exe", ["/C", batchPath])
       else
-        File.delete? exePath
+        Crystal::System::File.delete(exePath, raise_on_missing: false)
         File.rename(tempPath, exePath)
         puts "Upgrade failed. Please try again."
         exit 1
@@ -62,7 +62,7 @@ module Commands
       if File.executable?(tempPath)
         File.rename(tempPath, exePath)
       else
-        File.delete? tempPath
+        Crystal::System::File.delete(tempPath, raise_on_missing: false)
       end
     {% end %}
   end
