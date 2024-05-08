@@ -25,6 +25,13 @@ Quick start on Linux, macOS, FreeBSD and OpenBSD (root required):
 ``` shell
 # Windows x86_64
 curl -L -o mockgpt.exe https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-windows-x86_64.exe
+# OpenBSD x86_64
+sudo pkg_add curl
+sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-openbsd-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
+# FreeBSD x86_64
+sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-freebsd-x86_64
+sudo chmod +x /usr/local/bin/mockgpt
 # macOS arm64/x86_64
 sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-macos-universal
 sudo chmod +x /usr/bin/mockgpt
@@ -33,12 +40,6 @@ sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/release
 sudo chmod +x /usr/local/bin/mockgpt
 # Linux x86_64
 sudo curl -L -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-linux-x86_64
-sudo chmod +x /usr/local/bin/mockgpt
-# FreeBSD x86_64
-sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-freebsd-x86_64
-sudo chmod +x /usr/local/bin/mockgpt
-# OpenBSD x86_64
-sudo fetch -o /usr/local/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-openbsd-x86_64
 sudo chmod +x /usr/local/bin/mockgpt
 ```
 
