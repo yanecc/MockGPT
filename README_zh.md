@@ -22,6 +22,8 @@ Ollama及至少一个大模型
 快速安装（需要root权限）:
 
 ``` shell
+# Windows x86_64
+curl -L -o mockgpt.exe https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-windows-x86_64.exe
 # macOS arm64/x86_64
 sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-macos-universal
 sudo chmod +x /usr/bin/mockgpt

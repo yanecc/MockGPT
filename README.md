@@ -23,6 +23,8 @@ Ollama and at least one large model pulled.
 Quick start on Linux, macOS, FreeBSD and OpenBSD (root required):
 
 ``` shell
+# Windows x86_64
+curl -L -o mockgpt.exe https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-windows-x86_64.exe
 # macOS arm64/x86_64
 sudo curl -L -o /usr/bin/mockgpt https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-macos-universal
 sudo chmod +x /usr/bin/mockgpt
