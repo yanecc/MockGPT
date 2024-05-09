@@ -1,3 +1,5 @@
+require "./struct/*"
+
 class MockGPT < Grip::Controllers::Http
   def connect(context : Context)
     context
