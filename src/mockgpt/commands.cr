@@ -10,18 +10,17 @@ module Commands
       File.rename(exePath, tempPath)
       batchPath = File.join(File.dirname(exePath), ".upgrade.bat")
       url = "https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-windows-x86_64.exe"
-
-      wait_channel = Channel(Nil).new
       Process.on_terminate do |reason|
-        case reason
-        when .interrupted?
+        if reason.interrupted?
           File.rename(tempPath, exePath)
           {% if compare_versions(Crystal::VERSION, "1.5.0") >= 0 %}
             File.delete? batchPath
           {% else %}
             File.delete batchPath if File.exists? batchPath
           {% end %}
-          wait_channel.close
+        else
+          puts "Upgrade interrupted. Please try again."
+          exit 1
         end
       end
 
@@ -35,16 +34,10 @@ module Commands
         if exist "#{tempPath}" goto Repeat
         del "#{batchPath}"
         BATCH
-
         File.write(batchPath, batchContent)
-        wait_channel.receive
         Process.exec("cmd.exe", ["/C", batchPath])
+        puts "Upgrade succeeded!"
       else
-        {% if compare_versions(Crystal::VERSION, "1.5.0") >= 0 %}
-          File.delete? exePath
-        {% else %}
-          File.delete exePath if File.exists? exePath
-        {% end %}
         File.rename(tempPath, exePath)
         puts "Upgrade failed. Please try again."
         exit 1
@@ -69,12 +62,15 @@ module Commands
 
       if File.executable?(tempPath)
         File.rename(tempPath, exePath)
+        puts "Upgrade succeeded!"
       else
         {% if compare_versions(Crystal::VERSION, "1.5.0") >= 0 %}
           File.delete? tempPath
         {% else %}
           File.delete tempPath if File.exists? tempPath
         {% end %}
+        puts "Upgrade failed. Please try again."
+        exit 1
       end
     {% end %}
   end
