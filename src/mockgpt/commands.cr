@@ -18,9 +18,9 @@ module Commands
           {% else %}
             File.delete batchPath if File.exists? batchPath
           {% end %}
-          puts "Upgrade interrupted. Please try again."
+          STDERR.puts "Upgrade interrupted. Please try again."
         else
-          puts "Upgrade failed. Please try again."
+          STDERR.puts "Upgrade failed. Please try again."
         end
         exit 1
       end
@@ -36,11 +36,11 @@ module Commands
         del "#{batchPath}"
         BATCH
         File.write(batchPath, batchContent)
-        Process.exec("cmd.exe", ["/C", batchPath])
+        Process.new("cmd.exe", ["/C", batchPath])
         puts "Upgrade succeeded!"
       else
         File.rename(tempPath, exePath)
-        puts "Upgrade failed. Please try again."
+        STDERR.puts "Upgrade failed. Please try again."
         exit 1
       end
     {% else %}
@@ -70,7 +70,7 @@ module Commands
         {% else %}
           File.delete tempPath if File.exists? tempPath
         {% end %}
-        puts "Upgrade failed. Please try again."
+        STDERR.puts "Upgrade failed. Please try again."
         exit 1
       end
     {% end %}
