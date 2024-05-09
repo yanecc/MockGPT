@@ -18,10 +18,11 @@ module Commands
           {% else %}
             File.delete batchPath if File.exists? batchPath
           {% end %}
-        else
           puts "Upgrade interrupted. Please try again."
-          exit 1
+        else
+          puts "Upgrade failed. Please try again."
         end
+        exit 1
       end
 
       Utils.download(url, exePath)
