@@ -36,15 +36,9 @@ OptionParser.parse do |parser|
       case args[0]? || "all"
       when "all"
         Config.display
-      when "host", "model", "gpt"
+      when "host", "port", "model", "gpt"
         if args[1]?
-          Config.set confPath, args[0], args[1]
-        else
-          Config.display args[0]
-        end
-      when "port"
-        if args[1]?
-          Config.set confPath, args[0], args[1].to_i
+          Config.set confPath, args[0], args[1].to_i? || args[1]
         else
           Config.display args[0]
         end
