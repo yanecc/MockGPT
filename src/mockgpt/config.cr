@@ -14,7 +14,7 @@ module Config
   def init(path : Path)
     config = self.parse
     if File.exists? path
-      puts "Config file already exists at #{path}"
+      STDERR.puts "Config file already exists at #{path}"
     else
       File.write(path, config.to_pretty_json)
       puts "Config file created at #{path}"
@@ -56,7 +56,7 @@ module Config
       File.write(path, config.reject!(keys).to_pretty_json)
       puts "#{keys} got reset."
     else
-      puts "Please create a config file first.", ">> #{Mocker.executable} config init".colorize.bright.light_cyan
+      STDERR.puts "Please create a config file first.", ">> #{Mocker.executable} config init".colorize.bright.light_cyan
     end
   end
 
@@ -67,7 +67,7 @@ module Config
       File.write(path, config.to_pretty_json)
       puts "#{key} got set to #{value}."
     else
-      puts "Please create a config file first.", ">> #{Mocker.executable} config init".colorize.bright.light_cyan
+      STDERR.puts "Please create a config file first.", ">> #{Mocker.executable} config init".colorize.bright.light_cyan
     end
   end
 end
