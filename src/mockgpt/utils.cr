@@ -34,7 +34,7 @@ module Utils
   def confirmUpgrade(version : String) : Bool
     puts "New version available: v#{version}"
     print "Upgrade to the latest version? (y/N) "
-    answer = gets.not_nil!.chomp.downcase
+    answer = gets.try &.chomp.downcase
 
     answer == "y"
   end
