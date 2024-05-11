@@ -40,8 +40,7 @@ module Commands
         puts "Upgrade succeeded!"
       else
         File.rename(tempPath, exePath)
-        STDERR.puts "Upgrade failed. Please try again."
-        exit 1
+        abort "Upgrade failed. Please try again."
       end
     {% else %}
       url = "https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-"
@@ -70,8 +69,7 @@ module Commands
         {% else %}
           File.delete tempPath if File.exists? tempPath
         {% end %}
-        STDERR.puts "Upgrade failed. Please try again."
-        exit 1
+        abort "Upgrade failed. Please try again."
       end
     {% end %}
   end

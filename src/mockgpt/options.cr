@@ -31,7 +31,7 @@ OptionParser.parse do |parser|
     parser.unknown_args do |args, _|
       if args.size > 2
         STDERR.puts "Too many arguments: #{args}", parser
-        exit(1)
+        exit 1
       end
       case args[0]? || "all"
       when "all"

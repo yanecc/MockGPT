@@ -6,8 +6,7 @@ module Utils
     if response.status_code == 200
       return response.body.to_s.match(pattern).try &.[1] || abort "Failed to match available versions."
     else
-      puts "Failed to get latest version: #{response.status_message}"
-      exit(1)
+      abort "Failed to get latest version: #{response.status_message}"
     end
   end
 
