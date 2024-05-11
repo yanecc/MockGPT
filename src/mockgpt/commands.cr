@@ -56,7 +56,7 @@ module Commands
       {% elsif flag?(:linux) && flag?(:x86_64) %}
         url += "linux-x86_64"
       {% else %}
-        abort "No pre-built binary available for your platform."
+        abort "No pre-built executables available for your platform."
       {% end %}
       Utils.download(url, tempPath)
       File.chmod(tempPath, 0o755)
