@@ -10,7 +10,7 @@ shards:
 
   grip:
     git: https://github.com/grip-framework/grip.git
-    version: 2.0.4
+    version: 3.0.0
 
   radix:
     git: https://github.com/luislavena/radix.git

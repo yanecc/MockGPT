@@ -1,6 +1,6 @@
 class Application < Grip::Application
   def initialize(@host : String, @port : Int32)
-    super(environment: "production", serve_static: false)
+    super(environment: "production")
 
     router.insert(1, CrossOriginResourceSharing.new)
 

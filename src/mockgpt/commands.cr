@@ -8,7 +8,7 @@ module Commands
 
     {% if flag?(:windows) && flag?(:x86_64) %}
       File.rename(exePath, tempPath)
-      batchPath = File.join(File.dirname(exePath), ".upgrade.bat")
+      batchPath = File.join(File.dirname(exePath), ".upgrade.cmd")
       url = "https://github.com/yanecc/MockGPT/releases/download/latest/mockgpt-windows-x86_64.exe"
       Process.on_terminate do |reason|
         if reason.interrupted?
@@ -36,7 +36,7 @@ module Commands
         del "#{batchPath}"
         BATCH
         File.write(batchPath, batchContent)
-        Process.new("cmd.exe", ["/C", batchPath])
+        Process.new batchPath, shell: true
         puts "Upgrade succeeded!"
       else
         File.rename(tempPath, exePath)
