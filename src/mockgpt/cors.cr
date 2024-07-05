@@ -2,7 +2,7 @@ class CrossOriginResourceSharing
   include HTTP::Handler
 
   def call(context : HTTP::Server::Context)
-    context.response.headers.add "Server", "Grip/v2"
+    context.response.headers.add "Server", "Grip/v3"
     context.response.headers.add "Access-Control-Allow-Origin", "*"
     context.response.headers.add "Access-Control-Allow-Headers", "*"
     context.response.headers.add "Access-Control-Allow-Credentials", "true"
