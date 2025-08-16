@@ -1,6 +1,8 @@
 require "./struct/*"
 
-class MockGPT < Grip::Controllers::Http
+class MockGPT
+  include Grip::Controllers::HTTP
+
   def connect(context : Context)
     context
       .put_status(HTTP::Status::OK)

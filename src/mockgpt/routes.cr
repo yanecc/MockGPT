@@ -1,8 +1,8 @@
-class Application < Grip::Application
-  def initialize(@host : String, @port : Int32)
-    super(environment: "production")
+class Application
+  include Grip::Application
 
-    router.insert(1, CrossOriginResourceSharing.new)
+  def initialize(@host : String, @port : Int32)
+    handlers.insert(1, CrossOriginResourceSharing.new)
 
     post "/v1/chat/completions", MockGPT, as: :ollama
     options "/v1/chat/completions", MockGPT, as: :connect
