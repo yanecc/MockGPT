@@ -27,7 +27,7 @@ module Commands
 
       Utils.download(url, exePath)
 
-      if File.executable?(exePath)
+      if File::Info.executable?(exePath)
         batchContent = <<-BATCH
         @echo off
         :Repeat
